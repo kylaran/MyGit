@@ -1,0 +1,35 @@
+﻿@model TestLes.ProxyClasses.Contact
+
+@{
+    ViewBag.Title = "Изменить";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Edit @Model.Name</h1>
+<div>
+    @using (Html.BeginForm("Save", "Home"))
+    {
+        @Html.ValidationSummary()
+        <div>
+            <label>Имя</label><br />
+            @Html.EditorFor(m => m.Name)
+        </div>
+        <div>
+            <label>Мобильный телефон</label><br />
+            @Html.EditorFor(m => m.MobilePhone)
+        </div>
+        <div>
+            <label>Должность</label><br />
+            @Html.EditorFor(m => m.JobTitle)
+        </div>
+        <div>
+            <label>Дата рождения</label><br />
+            @Html.EditorFor(m => m.BirthDate)
+        </div>
+        <div>
+            @Html.HiddenFor(m => m.Id, "Value")
+            <input type="submit" value="Save" />
+        </div>
+        @Html.ActionLink("Отменить и вернуться к списку Контактов", "Index")
+    }
+</div>

@@ -1,0 +1,42 @@
+﻿@model IEnumerable<TestLes.ProxyClasses.Contact>
+    @{ 
+        ViewBag.Title = "Контакты";
+    }
+<table width="90%" align="center">
+    <p>
+        @Html.ActionLink("Создать контакт", "Create")
+        </p>
+<tr>
+    <th>Имя</th>
+    <th>Мобильный телефон</th>
+    <th>Обращение</th>
+    <th>Должность</th>
+    <th>Дата рождения</th>
+    <th>Изменить</th>
+    <th>Удалить</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+<tr>
+    <td>@item.Name</td>
+    <td>@item.MobilePhone</td>
+    <td>@item.Dear</td>
+    <td>@item.JobTitle</td>
+    <td>@item.BirthDate</td>
+    <td>
+        @using (Html.BeginForm("Edit", "Home"))
+        {
+            @Html.Hidden("contactId", item.Id)
+            <input type="submit" value="Edit" />
+        }
+    </td>
+    <td>
+        @using (Html.BeginForm("Delete", "Home"))
+        {
+            @Html.Hidden("contactId", item.Id)
+            <input type="submit" value="Delete" />
+        }
+    </td>
+</tr>
+    }
+    </table>

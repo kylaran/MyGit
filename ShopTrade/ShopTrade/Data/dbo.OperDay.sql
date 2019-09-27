@@ -1,0 +1,6 @@
+﻿CREATE TABLE [dbo].[Table]
+(
+	[Id] INT NOT NULL PRIMARY KEY, 
+    [OpenDay] DATETIME NOT NULL, 
+    [CloseDay] DATETIME NOT NULL
+)

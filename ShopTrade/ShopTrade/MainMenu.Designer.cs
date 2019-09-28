@@ -33,7 +33,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
             this.ContextMenu = new System.Windows.Forms.MenuStrip();
             this.File = new System.Windows.Forms.ToolStripMenuItem();
             this.OpenDay = new System.Windows.Forms.ToolStripMenuItem();
@@ -46,10 +45,15 @@
             this.DelProduct = new System.Windows.Forms.ToolStripMenuItem();
             this.Help = new System.Windows.Forms.ToolStripMenuItem();
             this.label2 = new System.Windows.Forms.Label();
-            this.button4 = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.ProductId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.articuleDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.quantityDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.countryDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.priceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.productsBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.DBSDataSet1BindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.DBSDataSet1 = new ShopTrade.DBSDataSet1();
@@ -63,12 +67,8 @@
             this.productsTableAdapter = new ShopTrade.DBSDataSet1TableAdapters.ProductsTableAdapter();
             this.basketsTableAdapter = new ShopTrade.DBSDataSet1TableAdapters.BasketsTableAdapter();
             this.productsTableAdapter1 = new ShopTrade.DBSDataSet1TableAdapters.ProductsTableAdapter();
-            this.ProductId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.articuleDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.quantityDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.countryDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.priceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
             this.ContextMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.productsBindingSource1)).BeginInit();
@@ -109,17 +109,6 @@
             this.button2.Text = "Оплата";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.Button2_Click);
-            // 
-            // button3
-            // 
-            this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button3.Location = new System.Drawing.Point(539, 278);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(231, 26);
-            this.button3.TabIndex = 6;
-            this.button3.Text = "Добавить в корзину";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.Button3_Click);
             // 
             // ContextMenu
             // 
@@ -217,16 +206,6 @@
             this.label2.TabIndex = 10;
             this.label2.Text = "КОРЗИНА";
             // 
-            // button4
-            // 
-            this.button4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button4.Location = new System.Drawing.Point(539, 316);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(231, 26);
-            this.button4.TabIndex = 11;
-            this.button4.Text = "Удалить с корзины";
-            this.button4.UseVisualStyleBackColor = true;
-            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -270,82 +249,6 @@
             this.dataGridView1.Size = new System.Drawing.Size(751, 214);
             this.dataGridView1.TabIndex = 14;
             // 
-            // productsBindingSource1
-            // 
-            this.productsBindingSource1.DataMember = "Products";
-            this.productsBindingSource1.DataSource = this.DBSDataSet1BindingSource;
-            // 
-            // DBSDataSet1BindingSource
-            // 
-            this.DBSDataSet1BindingSource.DataSource = this.DBSDataSet1;
-            this.DBSDataSet1BindingSource.Position = 0;
-            // 
-            // DBSDataSet1
-            // 
-            this.DBSDataSet1.DataSetName = "DBSDataSet1";
-            this.DBSDataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // dataGridView2
-            // 
-            this.dataGridView2.AutoGenerateColumns = false;
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.nameD2,
-            this.countryD2,
-            this.quantityD2,
-            this.priceD2});
-            this.dataGridView2.DataSource = this.basketsBindingSource1;
-            this.dataGridView2.Location = new System.Drawing.Point(15, 348);
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.Size = new System.Drawing.Size(755, 150);
-            this.dataGridView2.TabIndex = 15;
-            // 
-            // nameD2
-            // 
-            this.nameD2.DataPropertyName = "Name";
-            this.nameD2.HeaderText = "Name";
-            this.nameD2.Name = "nameD2";
-            // 
-            // countryD2
-            // 
-            this.countryD2.DataPropertyName = "Country";
-            this.countryD2.HeaderText = "Country";
-            this.countryD2.Name = "countryD2";
-            // 
-            // quantityD2
-            // 
-            this.quantityD2.DataPropertyName = "Quantity";
-            this.quantityD2.HeaderText = "Quantity";
-            this.quantityD2.Name = "quantityD2";
-            // 
-            // priceD2
-            // 
-            this.priceD2.DataPropertyName = "Price";
-            this.priceD2.HeaderText = "Price";
-            this.priceD2.Name = "priceD2";
-            // 
-            // basketsBindingSource1
-            // 
-            this.basketsBindingSource1.DataMember = "Baskets";
-            this.basketsBindingSource1.DataSource = this.DBSDataSet1BindingSource;
-            // 
-            // basketsBindingSource
-            // 
-            this.basketsBindingSource.DataMember = "Baskets";
-            this.basketsBindingSource.DataSource = this.DBSDataSet1BindingSource;
-            // 
-            // productsTableAdapter
-            // 
-            this.productsTableAdapter.ClearBeforeFill = true;
-            // 
-            // basketsTableAdapter
-            // 
-            this.basketsTableAdapter.ClearBeforeFill = true;
-            // 
-            // productsTableAdapter1
-            // 
-            this.productsTableAdapter1.ClearBeforeFill = true;
-            // 
             // ProductId
             // 
             this.ProductId.DataPropertyName = "ProductId";
@@ -383,18 +286,115 @@
             this.priceDataGridViewTextBoxColumn.HeaderText = "Цена";
             this.priceDataGridViewTextBoxColumn.Name = "priceDataGridViewTextBoxColumn";
             // 
+            // productsBindingSource1
+            // 
+            this.productsBindingSource1.DataMember = "Products";
+            this.productsBindingSource1.DataSource = this.DBSDataSet1BindingSource;
+            // 
+            // DBSDataSet1BindingSource
+            // 
+            this.DBSDataSet1BindingSource.DataSource = this.DBSDataSet1;
+            this.DBSDataSet1BindingSource.Position = 0;
+            // 
+            // DBSDataSet1
+            // 
+            this.DBSDataSet1.DataSetName = "DBSDataSet1";
+            this.DBSDataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // dataGridView2
+            // 
+            this.dataGridView2.AutoGenerateColumns = false;
+            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.nameD2,
+            this.countryD2,
+            this.quantityD2,
+            this.priceD2});
+            this.dataGridView2.DataSource = this.basketsBindingSource1;
+            this.dataGridView2.Location = new System.Drawing.Point(15, 348);
+            this.dataGridView2.Name = "dataGridView2";
+            this.dataGridView2.Size = new System.Drawing.Size(755, 150);
+            this.dataGridView2.TabIndex = 15;
+            // 
+            // nameD2
+            // 
+            this.nameD2.DataPropertyName = "Name";
+            this.nameD2.HeaderText = "Наименование";
+            this.nameD2.Name = "nameD2";
+            // 
+            // countryD2
+            // 
+            this.countryD2.DataPropertyName = "Country";
+            this.countryD2.HeaderText = "Страна производитель";
+            this.countryD2.Name = "countryD2";
+            // 
+            // quantityD2
+            // 
+            this.quantityD2.DataPropertyName = "Quantity";
+            this.quantityD2.HeaderText = "Количество";
+            this.quantityD2.Name = "quantityD2";
+            // 
+            // priceD2
+            // 
+            this.priceD2.DataPropertyName = "Price";
+            this.priceD2.HeaderText = "Цена";
+            this.priceD2.Name = "priceD2";
+            // 
+            // basketsBindingSource1
+            // 
+            this.basketsBindingSource1.DataMember = "Baskets";
+            this.basketsBindingSource1.DataSource = this.DBSDataSet1BindingSource;
+            // 
+            // basketsBindingSource
+            // 
+            this.basketsBindingSource.DataMember = "Baskets";
+            this.basketsBindingSource.DataSource = this.DBSDataSet1BindingSource;
+            // 
+            // productsTableAdapter
+            // 
+            this.productsTableAdapter.ClearBeforeFill = true;
+            // 
+            // basketsTableAdapter
+            // 
+            this.basketsTableAdapter.ClearBeforeFill = true;
+            // 
+            // productsTableAdapter1
+            // 
+            this.productsTableAdapter1.ClearBeforeFill = true;
+            // 
+            // button3
+            // 
+            this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.button3.Location = new System.Drawing.Point(536, 278);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(234, 32);
+            this.button3.TabIndex = 17;
+            this.button3.Text = "Добавить в корзину";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.Button3_Click);
+            // 
+            // button4
+            // 
+            this.button4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.button4.Location = new System.Drawing.Point(536, 311);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(234, 34);
+            this.button4.TabIndex = 18;
+            this.button4.Text = "Удалить с корзины";
+            this.button4.UseVisualStyleBackColor = true;
+            // 
             // MainMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(779, 550);
+            this.Controls.Add(this.button4);
+            this.Controls.Add(this.button3);
             this.Controls.Add(this.dataGridView2);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.button4);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label1);
@@ -424,7 +424,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
         private System.Windows.Forms.MenuStrip ContextMenu;
         private System.Windows.Forms.ToolStripMenuItem File;
         private System.Windows.Forms.ToolStripMenuItem OpenDay;
@@ -437,7 +436,6 @@
         private System.Windows.Forms.ToolStripMenuItem EditProduct;
         private System.Windows.Forms.ToolStripMenuItem DelProduct;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button button4;
         public System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.DataGridView dataGridView1;
@@ -451,16 +449,18 @@
         private System.Windows.Forms.BindingSource productsBindingSource1;
         private DBSDataSet1TableAdapters.ProductsTableAdapter productsTableAdapter1;
         private System.Windows.Forms.BindingSource basketsBindingSource1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn nameD2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn countryD2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn quantityD2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn priceD2;
         private System.Windows.Forms.DataGridViewTextBoxColumn ProductId;
         private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn articuleDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn quantityDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn countryDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn priceDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nameD2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn countryD2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn quantityD2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn priceD2;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button4;
     }
 }
 

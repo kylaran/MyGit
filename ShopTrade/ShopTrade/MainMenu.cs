@@ -53,11 +53,6 @@ namespace ShopTrade
            // textBox1.Width = textBox1.Width * 2;
         }
 
-        private void ListView1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void Exit_Click(object sender, EventArgs e)//кнопка закрытия
         {
             Close();
@@ -112,9 +107,6 @@ namespace ShopTrade
             form3.ShowDialog();
         }
 
-        private void MainMenu_Load(object sender, DpiChangedEventArgs e)
-        {}
-
         private void MainMenu_Resize(object sender, EventArgs e)
         {
             int formW = Width;
@@ -158,8 +150,6 @@ namespace ShopTrade
         {
             m_dbConn = new SQLiteConnection();
             m_sqlCmd = new SQLiteCommand();
-            button3.Hide();
-            button4.Hide();
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridView1.Columns["ProductId"].Visible = false;
             m_dbConn = new SQLiteConnection();
@@ -233,7 +223,7 @@ namespace ShopTrade
                 }
 
             }
-          //  dt1 = ((DataTable)dataGridView1.DataSource).Clone();
+           dt1 = ((DataTable)dataGridView1.DataSource).Clone();
         }
         
         public DataGridViewRow CloneWithValues(DataGridViewRow row)
@@ -248,40 +238,39 @@ namespace ShopTrade
 
         private void Button3_Click(object sender, EventArgs e) //добавить в корзину
         {
+            int tr = 0;
+            int ind = dataGridView1.CurrentRow.Index; // индекс выделенной строки
+            int qua = int.Parse((dataGridView1[3, ind].Value).ToString()); // количество, в выделенной строке  
+            dataGridView1[3, ind].Value = int.Parse((dataGridView1[3, ind].Value).ToString()) - 1; // минус 1 в таблице
 
-            string connStr = @"data source=Desktop-qrh9opm\msserv;Initial Catalog=DBS;Integrated Security=True;";
-           
             foreach (DataGridViewRow row in dataGridView1.SelectedRows)
             {
-                dt1.ImportRow(((DataTable)dataGridView1.DataSource).Rows[row.Index]);
-                dataGridView2.DataSource = dt1;
-                tv = tv + double.Parse((dataGridView2[3, n].Value).ToString());
-                label3.Text = "К ОПЛАТЕ: " + tv;
-            }
-            dt1.AcceptChanges();
-            n++;
-            DateTime DT = DateTime.Now;
-            using (SqlConnection con = new SqlConnection(connStr))
-            {
-                con.Open();
-                foreach (DataGridViewRow row in dataGridView2.Rows)
+   
+                for (int i=0;i<n;i++)
                 {
-                    if (row.Cells[0].Value != null && row.Cells[1].Value != null)
+                    if (dataGridView1[1,ind].Value == dataGridView2[0,i].Value)
                     {
-                        SqlCommand insert = new SqlCommand("BuyersID, Name, Country, Quantity, DateTrade, Price) VALUES (@BuyersID, @Name, @Country ,@Quantity, @DateTrade, @Price)", con);
-
-                        insert.Parameters.AddWithValue(" @BuyersID", SellN);
-                        insert.Parameters.AddWithValue(" @Name", row.Cells[0].Value);
-                        insert.Parameters.AddWithValue(" @Country", row.Cells[1].Value);
-                        insert.Parameters.AddWithValue(" @Quantity", row.Cells[2].Value);
-                        insert.Parameters.AddWithValue(" @DateTrade", DT);
-                        insert.Parameters.AddWithValue(" @Price", row.Cells[3].Value);
-
-                        //insert.ExecuteNonQuery();
+                       // dt1.ImportRow(((DataTable)dataGridView1.DataSource).Rows[row.Index]);
+                        dataGridView2[2, i].Value = int.Parse((dataGridView2[2, i].Value).ToString())+1; // введенное значение в корзине
+                        tv = tv + double.Parse((dataGridView2[3, i].Value).ToString());
+                        tr = 1;
+                        goto qwer;
                     }
                 }
-                con.Close();
+                if (tr == 0)
+                {
+                    dt1.ImportRow(((DataTable)dataGridView1.DataSource).Rows[row.Index]);
+                    dataGridView2.DataSource = dt1;
+                    dataGridView2[2, n].Value = qua - int.Parse((dataGridView1[3, ind].Value).ToString()); // введенное значение в корзине
+                    tv = tv + double.Parse((dataGridView2[3, n].Value).ToString());
+                }
+               
             }
+            n++;
+            qwer:
+            label3.Text = "К ОПЛАТЕ: " + tv;
+            dt1.AcceptChanges();
+            DateTime DT = DateTime.Now;
             //dataset2 = dataGridView2.DataSource;
             // dataset2.WriteXml("1.xml");//сериализовать в файл все данные из датасет
         }

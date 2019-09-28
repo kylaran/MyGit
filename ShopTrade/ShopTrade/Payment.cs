@@ -13,6 +13,8 @@ namespace ShopTrade
     public partial class Payment : Form
     {
         public bool ff = false;
+        DataTable dTable = new DataTable();
+        String sqlQuery;
 
         public Payment()
         {
@@ -34,6 +36,7 @@ namespace ShopTrade
 
         private void Button1_Click(object sender, EventArgs e)
         {
+
             MainMenu form2 = new MainMenu();
             form2.label3.Text = "К ОПЛАТЕ: 0";
             while (form2.dataGridView2.Rows.Count != 0)

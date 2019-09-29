@@ -10,13 +10,14 @@ using System.Runtime;
 using System.Drawing;
 using System.Threading.Tasks;
 using System.Data.SQLite;
-
+using System.Globalization;
 namespace ShopTrade
 {
     
     public partial class AddProduct : Form
     {
-        private String dbFileName = "ShopTrade.db";
+       // CurrentCulture = new System.Globalization.CultureInfo("en-US");
+        private readonly String dbFileName = "ShopTrade.db";
         private SQLiteConnection m_dbConn;
         private SQLiteCommand m_sqlCmd;
         public AddProduct()
@@ -77,7 +78,7 @@ namespace ShopTrade
             if (textBox3.Text.Length >=1)
             {
                 label3.ForeColor = Color.Green; //name
-                pric = float.Parse(textBox3.Text);
+                pric =float.Parse(textBox3.Text);
                 
             }
             else
@@ -144,6 +145,29 @@ namespace ShopTrade
             m_dbConn = new SQLiteConnection();
             m_sqlCmd = new SQLiteCommand();
         }
+        private void TextBox4_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            char num = e.KeyChar;
+            if ((num <= 96 || num >= 123) && (num <= 64 || num >= 91) && (num <= 47 || num >= 58) && num != 8) //цифры, клавиша BackSpace и запятая а ASCII
+            {
+                e.Handled = true;
+            }
+        }
+        private void TextBox3_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            char num = e.KeyChar;
+            if ((num <= 47 || num >= 58) && num != 8 && num != 46) //цифры, клавиша BackSpace и запятая а ASCII
+            {
+                e.Handled = true;
+            }
+        }
+        private void TextBox5_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            char num = e.KeyChar;
+            if ((num <= 47 || num >= 58) && num != 8) //цифры, клавиша BackSpace ASCII
+            {
+                e.Handled = true;
+            }
+        }
     }
-
 }

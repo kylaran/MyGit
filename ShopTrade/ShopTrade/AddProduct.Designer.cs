@@ -65,6 +65,7 @@
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(319, 29);
             this.textBox3.TabIndex = 2;
+            this.textBox3.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBox3_KeyPress);
             // 
             // label1
             // 
@@ -145,6 +146,7 @@
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(319, 29);
             this.textBox4.TabIndex = 10;
+            this.textBox4.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBox4_KeyPress);
             // 
             // textBox5
             // 
@@ -153,6 +155,7 @@
             this.textBox5.Name = "textBox5";
             this.textBox5.Size = new System.Drawing.Size(319, 29);
             this.textBox5.TabIndex = 11;
+            this.textBox5.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBox5_KeyPress);
             // 
             // AddProduct
             // 

@@ -11,23 +11,21 @@ using System.Data.Sql;
 using System.IO;
 using System.Data.SQLite;
 using System.Data.Entity;
-using System.Linq;
-using System.Data.SqlClient;
 
 namespace ShopTrade
 {
     public partial class MainMenu : Form
     {
-        private String dbFileName = "ShopTrade.db";
+        
+        private readonly String dbFileName = "ShopTrade.db";
         private SQLiteConnection m_dbConn;
         private SQLiteCommand m_sqlCmd;
         int n = 0;
-        int m = 0;
         DataTable dt1;
-        DataSet ds = new DataSet();
-        DataTable dt = new DataTable();
+        readonly DataSet ds = new DataSet();
+        readonly DataTable dt = new DataTable();
         public double tv = 0;
-        int SellN = 0;
+        readonly int SellN = 0;
 
         public class BasContext : DbContext
         {
@@ -40,8 +38,8 @@ namespace ShopTrade
         }
         public MainMenu()
         {
-
-        InitializeComponent();
+            System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
+            InitializeComponent();
             ds.Tables.Add(dt);
             DateTime mod = new DateTime();
             mod = DateTime.Today;
@@ -238,48 +236,61 @@ namespace ShopTrade
 
         private void Button3_Click(object sender, EventArgs e) //добавить в корзину
         {
-            int tr = 0;
-            int ind = dataGridView1.CurrentRow.Index; // индекс выделенной строки
-            int qua = int.Parse((dataGridView1[3, ind].Value).ToString()); // количество, в выделенной строке  
-            dataGridView1[3, ind].Value = int.Parse((dataGridView1[3, ind].Value).ToString()) - 1; // минус 1 в таблице
-
-            foreach (DataGridViewRow row in dataGridView1.SelectedRows)
+            if (dataGridView1.CurrentRow == null)
             {
-   
-                for (int i=0;i<n;i++)
-                {
-                    if (dataGridView1[1,ind].Value == dataGridView2[0,i].Value)
-                    {
-                       // dt1.ImportRow(((DataTable)dataGridView1.DataSource).Rows[row.Index]);
-                        dataGridView2[2, i].Value = int.Parse((dataGridView2[2, i].Value).ToString())+1; // введенное значение в корзине
-                        tv = tv + double.Parse((dataGridView2[3, i].Value).ToString());
-                        tr = 1;
-                        goto qwer;
-                    }
-                }
-                if (tr == 0)
-                {
-                    dt1.ImportRow(((DataTable)dataGridView1.DataSource).Rows[row.Index]);
-                    dataGridView2.DataSource = dt1;
-                    dataGridView2[2, n].Value = qua - int.Parse((dataGridView1[3, ind].Value).ToString()); // введенное значение в корзине
-                    tv = tv + double.Parse((dataGridView2[3, n].Value).ToString());
-                }
-               
+                AddInBask formN = new AddInBask();
+                formN.ShowDialog();
             }
-            n++;
-            qwer:
-            label3.Text = "К ОПЛАТЕ: " + tv;
-            dt1.AcceptChanges();
-            DateTime DT = DateTime.Now;
+            else
+            {
+                if (dataGridView2.Rows.Count == 0)
+                    n = 0;
+                int tr = 0;
+                int ind = dataGridView1.CurrentRow.Index; // индекс выделенной строки
+                int qua = int.Parse((dataGridView1[3, ind].Value).ToString()); // количество, в выделенной строке  
+                dataGridView1[3, ind].Value = int.Parse((dataGridView1[3, ind].Value).ToString()) - 1; // минус 1 в таблице
+
+                foreach (DataGridViewRow row in dataGridView1.SelectedRows)
+                {
+
+                    for (int i = 0; i < n; i++)
+                    {
+                        if (dataGridView1[1, ind].Value == dataGridView2[0, i].Value)
+                        {
+                            // dt1.ImportRow(((DataTable)dataGridView1.DataSource).Rows[row.Index]);
+                            dataGridView2[2, i].Value = int.Parse((dataGridView2[2, i].Value).ToString()) + 1; // введенное значение в корзине
+                            tv += double.Parse((dataGridView2[3, i].Value).ToString());
+                            tr = 1;
+                            goto qwer;
+                        }
+                    }
+                    if (tr == 0)
+                    {
+                        dt1.ImportRow(((DataTable)dataGridView1.DataSource).Rows[row.Index]);
+                        dataGridView2.DataSource = dt1;
+                        dataGridView2[2, n].Value = qua - int.Parse((dataGridView1[3, ind].Value).ToString()); // введенное значение в корзине
+                        tv += double.Parse((dataGridView2[3, n].Value).ToString());
+                    }
+
+                }
+                n++;
+                qwer:
+                label3.Text = "К ОПЛАТЕ: " + tv;
+                dt1.AcceptChanges();
+                
+            }
             //dataset2 = dataGridView2.DataSource;
             // dataset2.WriteXml("1.xml");//сериализовать в файл все данные из датасет
         }
 
         private void Button2_Click(object sender, EventArgs e)//оплата
         {
-            dataGridView2.DataSource = ds.Tables[0];
+            //dataGridView2.DataSource = ds.Tables[0];
             ds.WriteXml("1.xml");
-            Payment formP = new Payment();
+            Payment formP = new Payment(tv)
+            {
+                Owner = this
+            };
             //this.Hide();
             formP.ShowDialog();
             //this.Close();
@@ -328,6 +339,40 @@ namespace ShopTrade
                 formN.ShowDialog();
                 //this.Close();
             }
+        }
+
+        private void Button4_Click(object sender, EventArgs e)
+        {
+           
+            if (n != 0)
+            {
+                int ind = dataGridView2.CurrentRow.Index; // индекс выделенной строки
+                int qua = int.Parse((dataGridView2[2, ind].Value).ToString()); // количество, в выделенной строке  
+                n--;
+                dataGridView1[3, ind].Value = int.Parse((dataGridView1[3, ind].Value).ToString()) + qua; // минус 1 в таблице
+                tv -= double.Parse(dataGridView2.Rows[dataGridView2.CurrentRow.Index].Cells[3].Value.ToString()) * qua;
+                dataGridView2.Rows.Remove(dataGridView2.Rows[dataGridView2.CurrentRow.Index]);
+                label3.Text = "К ОПЛАТЕ: " + tv;
+            }
+            else
+            {
+               
+                DelBask formD = new DelBask();
+                formD.ShowDialog();
+            }
+        }
+
+        private void InfoDay_Click(object sender, EventArgs e)
+        {
+           /* DayResults formD = new DayResults();
+            formD.ShowDialog();*/
+        }
+
+        private void Help_Click(object sender, EventArgs e)
+        {
+           /* DataTable dTable = new DataTable();
+            String sqlQuery = "DELETE FROM Baskets; ";
+            SQLiteDataAdapter adapter = new SQLiteDataAdapter(sqlQuery, m_dbConn);*/
         }
     }
 }

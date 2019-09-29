@@ -25,7 +25,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>2</ApplicationRevision>
+    <ApplicationRevision>3</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -110,6 +110,12 @@
     <Compile Include="CloseDay.Designer.cs">
       <DependentUpon>CloseDay.cs</DependentUpon>
     </Compile>
+    <Compile Include="DayResults.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DayResults.Designer.cs">
+      <DependentUpon>DayResults.cs</DependentUpon>
+    </Compile>
     <Compile Include="DbIni.cs" />
     <Compile Include="DBSDataSet1.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -142,11 +148,23 @@
     <Compile Include="NotSelect.Designer.cs">
       <DependentUpon>NotSelect.cs</DependentUpon>
     </Compile>
+    <Compile Include="AddInBask.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddInBask.Designer.cs">
+      <DependentUpon>AddInBask.cs</DependentUpon>
+    </Compile>
     <Compile Include="Warning2NewDay.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Warning2NewDay.Designer.cs">
       <DependentUpon>Warning2NewDay.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DelBask.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DelBask.Designer.cs">
+      <DependentUpon>DelBask.cs</DependentUpon>
     </Compile>
     <Compile Include="WarningOpenDay.cs">
       <SubType>Form</SubType>
@@ -162,6 +180,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CloseDay.resx">
       <DependentUpon>CloseDay.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DayResults.resx">
+      <DependentUpon>DayResults.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainMenu.resx">
       <DependentUpon>MainMenu.cs</DependentUpon>
@@ -185,8 +206,14 @@
     <EmbeddedResource Include="NotSelect.resx">
       <DependentUpon>NotSelect.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="AddInBask.resx">
+      <DependentUpon>AddInBask.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Warning2NewDay.resx">
       <DependentUpon>Warning2NewDay.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DelBask.resx">
+      <DependentUpon>DelBask.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WarningOpenDay.resx">
       <DependentUpon>WarningOpenDay.cs</DependentUpon>

@@ -352,7 +352,7 @@ namespace ShopTrade
                 dataGridView1[3, ind].Value = int.Parse((dataGridView1[3, ind].Value).ToString()) + qua; // минус 1 в таблице
                 tv -= double.Parse(dataGridView2.Rows[dataGridView2.CurrentRow.Index].Cells[3].Value.ToString()) * qua;
                 dataGridView2.Rows.Remove(dataGridView2.Rows[dataGridView2.CurrentRow.Index]);
-                label3.Text = "К ОПЛАТЕ: " + tv;
+                label3.Text = " К ОПЛАТЕ: " + tv;
             }
             else
             {

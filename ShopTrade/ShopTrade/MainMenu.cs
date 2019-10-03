@@ -364,15 +364,15 @@ namespace ShopTrade
 
         private void InfoDay_Click(object sender, EventArgs e)
         {
-           /* DayResults formD = new DayResults();
-            formD.ShowDialog();*/
+            DayResults formD = new DayResults();
+            formD.ShowDialog();
         }
 
         private void Help_Click(object sender, EventArgs e)
         {
-           /* DataTable dTable = new DataTable();
+            DataTable dTable = new DataTable();
             String sqlQuery = "DELETE FROM Baskets; ";
-            SQLiteDataAdapter adapter = new SQLiteDataAdapter(sqlQuery, m_dbConn);*/
+            SQLiteDataAdapter adapter = new SQLiteDataAdapter(sqlQuery, m_dbConn);
         }
     }
 }

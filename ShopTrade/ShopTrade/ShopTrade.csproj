@@ -92,6 +92,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddColor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddColor.Designer.cs">
+      <DependentUpon>AddColor.cs</DependentUpon>
+    </Compile>
     <Compile Include="AddProduct.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -109,6 +115,12 @@
     </Compile>
     <Compile Include="CloseDay.Designer.cs">
       <DependentUpon>CloseDay.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Colors.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Colors.Designer.cs">
+      <DependentUpon>Colors.cs</DependentUpon>
     </Compile>
     <Compile Include="DayResults.cs">
       <SubType>Form</SubType>
@@ -172,6 +184,9 @@
     <Compile Include="WarningOpenDay.Designer.cs">
       <DependentUpon>WarningOpenDay.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="AddColor.resx">
+      <DependentUpon>AddColor.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AddProduct.resx">
       <DependentUpon>AddProduct.cs</DependentUpon>
     </EmbeddedResource>
@@ -180,6 +195,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CloseDay.resx">
       <DependentUpon>CloseDay.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Colors.resx">
+      <DependentUpon>Colors.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DayResults.resx">
       <DependentUpon>DayResults.cs</DependentUpon>

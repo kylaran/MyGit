@@ -127,7 +127,8 @@ namespace ShopTrade
                         MessageBox.Show("Error: " + ex.Message);
                     }
             }
-            else {
+            else
+            {
                 var originalColor = button1.BackColor;
                 button1.BackColor = Color.Red;
                 await Task.Delay(2000); // 5 секунд

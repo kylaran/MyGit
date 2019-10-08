@@ -146,8 +146,6 @@ namespace ShopTrade
 
         private void MainMenu_Load(object sender, EventArgs e)
         {
-            m_dbConn = new SQLiteConnection();
-            m_sqlCmd = new SQLiteCommand();
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridView1.Columns["ProductId"].Visible = false;
             m_dbConn = new SQLiteConnection();
@@ -373,6 +371,12 @@ namespace ShopTrade
             DataTable dTable = new DataTable();
             String sqlQuery = "DELETE FROM Baskets; ";
             SQLiteDataAdapter adapter = new SQLiteDataAdapter(sqlQuery, m_dbConn);
+        }
+
+        private void КраскиToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Colors formС = new Colors();
+            formС.ShowDialog();
         }
     }
 }

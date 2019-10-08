@@ -48,10 +48,20 @@
             this.label3 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.ProductId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.articuleDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.quantityDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.countryDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.priceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.productsBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.DBSDataSet1BindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.DBSDataSet1 = new ShopTrade.DBSDataSet1();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.nameD2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.countryD2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.quantityD2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.priceD2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.basketsBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.basketsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.productsTableAdapter = new ShopTrade.DBSDataSet1TableAdapters.ProductsTableAdapter();
@@ -59,16 +69,7 @@
             this.productsTableAdapter1 = new ShopTrade.DBSDataSet1TableAdapters.ProductsTableAdapter();
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
-            this.ProductId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.articuleDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.quantityDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.countryDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.priceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nameD2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.countryD2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.quantityD2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.priceD2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.краскиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ContextMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.productsBindingSource1)).BeginInit();
@@ -166,7 +167,8 @@
             this.Edit.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.EntProduct,
             this.EditProduct,
-            this.DelProduct});
+            this.DelProduct,
+            this.краскиToolStripMenuItem});
             this.Edit.Name = "Edit";
             this.Edit.Size = new System.Drawing.Size(51, 20);
             this.Edit.Text = "Товар";
@@ -174,21 +176,21 @@
             // EntProduct
             // 
             this.EntProduct.Name = "EntProduct";
-            this.EntProduct.Size = new System.Drawing.Size(163, 22);
+            this.EntProduct.Size = new System.Drawing.Size(180, 22);
             this.EntProduct.Text = "Ввод";
             this.EntProduct.Click += new System.EventHandler(this.EntProduct_Click);
             // 
             // EditProduct
             // 
             this.EditProduct.Name = "EditProduct";
-            this.EditProduct.Size = new System.Drawing.Size(163, 22);
+            this.EditProduct.Size = new System.Drawing.Size(180, 22);
             this.EditProduct.Text = "Редактирование";
             this.EditProduct.Click += new System.EventHandler(this.EditProduct_Click);
             // 
             // DelProduct
             // 
             this.DelProduct.Name = "DelProduct";
-            this.DelProduct.Size = new System.Drawing.Size(163, 22);
+            this.DelProduct.Size = new System.Drawing.Size(180, 22);
             this.DelProduct.Text = "Удаление";
             this.DelProduct.Click += new System.EventHandler(this.DelProduct_Click);
             // 
@@ -251,6 +253,45 @@
             this.dataGridView1.Size = new System.Drawing.Size(751, 214);
             this.dataGridView1.TabIndex = 14;
             // 
+            // ProductId
+            // 
+            this.ProductId.DataPropertyName = "ProductId";
+            this.ProductId.HeaderText = "ProductId";
+            this.ProductId.Name = "ProductId";
+            this.ProductId.ReadOnly = true;
+            // 
+            // nameDataGridViewTextBoxColumn
+            // 
+            this.nameDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
+            this.nameDataGridViewTextBoxColumn.HeaderText = "Наименование";
+            this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
+            this.nameDataGridViewTextBoxColumn.Width = 106;
+            // 
+            // articuleDataGridViewTextBoxColumn
+            // 
+            this.articuleDataGridViewTextBoxColumn.DataPropertyName = "Articule";
+            this.articuleDataGridViewTextBoxColumn.HeaderText = "Артикул";
+            this.articuleDataGridViewTextBoxColumn.Name = "articuleDataGridViewTextBoxColumn";
+            // 
+            // quantityDataGridViewTextBoxColumn
+            // 
+            this.quantityDataGridViewTextBoxColumn.DataPropertyName = "Quantity";
+            this.quantityDataGridViewTextBoxColumn.HeaderText = "Количество";
+            this.quantityDataGridViewTextBoxColumn.Name = "quantityDataGridViewTextBoxColumn";
+            // 
+            // countryDataGridViewTextBoxColumn
+            // 
+            this.countryDataGridViewTextBoxColumn.DataPropertyName = "Country";
+            this.countryDataGridViewTextBoxColumn.HeaderText = "Страна производитель";
+            this.countryDataGridViewTextBoxColumn.Name = "countryDataGridViewTextBoxColumn";
+            // 
+            // priceDataGridViewTextBoxColumn
+            // 
+            this.priceDataGridViewTextBoxColumn.DataPropertyName = "Price";
+            this.priceDataGridViewTextBoxColumn.HeaderText = "Цена";
+            this.priceDataGridViewTextBoxColumn.Name = "priceDataGridViewTextBoxColumn";
+            // 
             // productsBindingSource1
             // 
             this.productsBindingSource1.DataMember = "Products";
@@ -280,6 +321,32 @@
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.Size = new System.Drawing.Size(755, 150);
             this.dataGridView2.TabIndex = 15;
+            // 
+            // nameD2
+            // 
+            this.nameD2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.nameD2.DataPropertyName = "Name";
+            this.nameD2.HeaderText = "Наименование";
+            this.nameD2.Name = "nameD2";
+            this.nameD2.Width = 106;
+            // 
+            // countryD2
+            // 
+            this.countryD2.DataPropertyName = "Country";
+            this.countryD2.HeaderText = "Страна производитель";
+            this.countryD2.Name = "countryD2";
+            // 
+            // quantityD2
+            // 
+            this.quantityD2.DataPropertyName = "Quantity";
+            this.quantityD2.HeaderText = "Количество";
+            this.quantityD2.Name = "quantityD2";
+            // 
+            // priceD2
+            // 
+            this.priceD2.DataPropertyName = "Price";
+            this.priceD2.HeaderText = "Цена";
+            this.priceD2.Name = "priceD2";
             // 
             // basketsBindingSource1
             // 
@@ -325,70 +392,12 @@
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.Button4_Click);
             // 
-            // ProductId
+            // краскиToolStripMenuItem
             // 
-            this.ProductId.DataPropertyName = "ProductId";
-            this.ProductId.HeaderText = "ProductId";
-            this.ProductId.Name = "ProductId";
-            this.ProductId.ReadOnly = true;
-            // 
-            // nameDataGridViewTextBoxColumn
-            // 
-            this.nameDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
-            this.nameDataGridViewTextBoxColumn.HeaderText = "Наименование";
-            this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
-            this.nameDataGridViewTextBoxColumn.Width = 106;
-            // 
-            // articuleDataGridViewTextBoxColumn
-            // 
-            this.articuleDataGridViewTextBoxColumn.DataPropertyName = "Articule";
-            this.articuleDataGridViewTextBoxColumn.HeaderText = "Артикул";
-            this.articuleDataGridViewTextBoxColumn.Name = "articuleDataGridViewTextBoxColumn";
-            // 
-            // quantityDataGridViewTextBoxColumn
-            // 
-            this.quantityDataGridViewTextBoxColumn.DataPropertyName = "Quantity";
-            this.quantityDataGridViewTextBoxColumn.HeaderText = "Количество";
-            this.quantityDataGridViewTextBoxColumn.Name = "quantityDataGridViewTextBoxColumn";
-            // 
-            // countryDataGridViewTextBoxColumn
-            // 
-            this.countryDataGridViewTextBoxColumn.DataPropertyName = "Country";
-            this.countryDataGridViewTextBoxColumn.HeaderText = "Страна производитель";
-            this.countryDataGridViewTextBoxColumn.Name = "countryDataGridViewTextBoxColumn";
-            // 
-            // priceDataGridViewTextBoxColumn
-            // 
-            this.priceDataGridViewTextBoxColumn.DataPropertyName = "Price";
-            this.priceDataGridViewTextBoxColumn.HeaderText = "Цена";
-            this.priceDataGridViewTextBoxColumn.Name = "priceDataGridViewTextBoxColumn";
-            // 
-            // nameD2
-            // 
-            this.nameD2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.nameD2.DataPropertyName = "Name";
-            this.nameD2.HeaderText = "Наименование";
-            this.nameD2.Name = "nameD2";
-            this.nameD2.Width = 106;
-            // 
-            // countryD2
-            // 
-            this.countryD2.DataPropertyName = "Country";
-            this.countryD2.HeaderText = "Страна производитель";
-            this.countryD2.Name = "countryD2";
-            // 
-            // quantityD2
-            // 
-            this.quantityD2.DataPropertyName = "Quantity";
-            this.quantityD2.HeaderText = "Количество";
-            this.quantityD2.Name = "quantityD2";
-            // 
-            // priceD2
-            // 
-            this.priceD2.DataPropertyName = "Price";
-            this.priceD2.HeaderText = "Цена";
-            this.priceD2.Name = "priceD2";
+            this.краскиToolStripMenuItem.Name = "краскиToolStripMenuItem";
+            this.краскиToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.краскиToolStripMenuItem.Text = "Краски";
+            this.краскиToolStripMenuItem.Click += new System.EventHandler(this.КраскиToolStripMenuItem_Click);
             // 
             // MainMenu
             // 
@@ -468,6 +477,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn countryD2;
         private System.Windows.Forms.DataGridViewTextBoxColumn quantityD2;
         private System.Windows.Forms.DataGridViewTextBoxColumn priceD2;
+        private System.Windows.Forms.ToolStripMenuItem краскиToolStripMenuItem;
     }
 }
 

@@ -56,13 +56,15 @@ namespace ShopTrade
                 {
                     int qu = int.Parse(form2.dataGridView2[2, i].Value.ToString());
                     string nam;
+                    float pri;
                     nam = form2.dataGridView2.Rows[i].Cells[0].Value.ToString();
+                    pri = int.Parse(form2.dataGridView2[2, i].Value.ToString());
                     DataTable dTable = new DataTable();
                     try
                     {
                         m_sqlCmd.CommandText = "UPDATE Products " +
                                         "SET Quantity = Quantity - " + qu +
-                                         " WHERE Name = '" + nam + "';";
+                                         " WHERE (Name = '" + nam + "' ) AND (Price = "+pri+");";
 
                         m_sqlCmd.ExecuteNonQuery();
                     }

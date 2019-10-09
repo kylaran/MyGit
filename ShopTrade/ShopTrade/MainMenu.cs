@@ -25,7 +25,7 @@ namespace ShopTrade
         readonly DataSet ds = new DataSet();
         readonly DataTable dt = new DataTable();
         public double tv = 0;
-        readonly int SellN = 0;
+       // readonly int SellN = 0;
 
         public class BasContext : DbContext
         {
@@ -48,22 +48,21 @@ namespace ShopTrade
             sw.Close();
             //FormBorderStyle = FormBorderStyle.None;
             WindowState = FormWindowState.Maximized;
-           // textBox1.Width = textBox1.Width * 2;
-        }
+            // textBox1.Width = textBox1.Width * 2;
+            this.KeyPreview = true;
+        } 
 
         private void Exit_Click(object sender, EventArgs e)//кнопка закрытия
         {
             Close();
         }
-
+        /// ////////////////////////////
         private void EntProduct_Click(object sender, EventArgs e)//кнопка ввода товара
         {
             AddProduct form2 = new AddProduct();
-            this.Hide();
             form2.ShowDialog();
-            this.Close();
         }
-
+        /// ////////////////////////////
         private void OpenDay_Click(object sender, EventArgs e)//Открытие смены
         {
             string nF = "dd.ddd";
@@ -98,13 +97,13 @@ namespace ShopTrade
 
             }
         }
-
+        /// ////////////////////////////
         private void CloseDay_Click(object sender, EventArgs e)//кнопка закрытия смены
         {
             CloseDay form3 = new CloseDay();
             form3.ShowDialog();
         }
-
+        /// ////////////////////////////
         private void MainMenu_Resize(object sender, EventArgs e)
         {
             int formW = Width;
@@ -123,12 +122,10 @@ namespace ShopTrade
             label3.Top = t1;            //К оплате
             int t2 = label1.Top;
             int l1 = label1.Left + label1.Width + 10;
-            comboBox1.Top = t2;         //Критерий поиска
-            comboBox1.Left = l1;        //Критерий поиска
-            l1 = l1 + comboBox1.Width + 10;
+            l1 = l1 + 10;
             textBox1.Top = t2;          //Ввод поиска
             textBox1.Left = l1;         //Ввод поиска
-            textBox1.Width = formW - 44 - label1.Left - label1.Width - comboBox1.Width;   //Ввод поиска
+            textBox1.Width = formW - 44 - label1.Left - label1.Width ;   //Ввод поиска
             int l2 = Convert.ToInt32((dataGridView2.Width - label2.Width) / 2);
             int t3 = dataGridView2.Top - 45;
             label2.Left = l2;           //Корзина
@@ -143,85 +140,21 @@ namespace ShopTrade
             button4.Left = l4;          //Удалить с корзины
 
         }
-
+        /// ////////////////////////////
         private void MainMenu_Load(object sender, EventArgs e)
         {
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridView1.Columns["ProductId"].Visible = false;
             m_dbConn = new SQLiteConnection();
             m_sqlCmd = new SQLiteCommand();
+            dataGridView1.ContextMenuStrip = contextMenuStrip2;
         }
-
+        /// ////////////////////////////
         private void TextBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
-            DateTime OpenD = new DateTime();
-            StreamReader sr = new StreamReader(@"dd.ddd");
-            OpenD = DateTime.Parse(sr.ReadToEnd());
-            sr.Close();
-            m_dbConn = new SQLiteConnection();
-            m_sqlCmd = new SQLiteCommand();
-
-            if (OpenD.DayOfYear != DateTime.Today.DayOfYear)
-            {
-                Warning2NewDay form6 = new Warning2NewDay();
-                form6.ShowDialog();
-            }
-            else
-            {
-
-                try
-                {
-                    m_dbConn = new SQLiteConnection("Data Source=" + dbFileName + ";Version=3;");
-                    m_dbConn.Open();
-                    m_sqlCmd.Connection = m_dbConn;
-                }
-                catch (SQLiteException ex)
-                {
-                    MessageBox.Show("Error: " + ex.Message);
-                }
-
-                DataTable dTable = new DataTable();
-                String sqlQuery;
-                if (m_dbConn.State != ConnectionState.Open)
-                {
-                    MessageBox.Show("Open connection with database");
-                    return;
-                }
-
-                try
-                {
-                    sqlQuery = "SELECT * FROM Products";
-                    SQLiteDataAdapter adapter = new SQLiteDataAdapter(sqlQuery, m_dbConn);
-                    adapter.Fill(dTable);
-                    dataGridView1.DataSource = dTable;
-                    //for (int i = 0; i < dTable.Rows.Count; i++)
-                      //  dataGridView1.Rows.Add(dTable.Rows[i].ItemArray);
-
-                }
-                catch (SQLiteException ex)
-                {
-                    MessageBox.Show("Error: " + ex.Message);
-                }
-                //  this.productsTableAdapter.Fill(this.DBSDataSet1.Products);
-                // dataGridView1.DataSource = DBSDataSet1.Products;
-
-                for (int i = 0; i < dataGridView1.RowCount; i++)
-                {
-                    dataGridView1.Rows[i].Selected = false;
-                    for (int j = 0; j < dataGridView1.ColumnCount; j++)
-                        if (dataGridView1.Rows[i].Cells[j].Value != null)
-                            if (dataGridView1.Rows[i].Cells[j].Value.ToString().ToLower().Contains(textBox1.Text.ToLower()))
-                            {
-                                dataGridView1.Rows[i].Selected = true;
-                                dataGridView1.FirstDisplayedScrollingRowIndex = i;
-                                break;
-                            }
-                }
-
-            }
-           dt1 = ((DataTable)dataGridView1.DataSource).Clone();
+           
         }
-        
+        /// ////////////////////////////
         public DataGridViewRow CloneWithValues(DataGridViewRow row)
         {
             DataGridViewRow clonedRow = (DataGridViewRow)row.Clone();
@@ -231,7 +164,7 @@ namespace ShopTrade
             }
             return clonedRow;
         }
-
+        /// ////////////////////////////
         private void Button3_Click(object sender, EventArgs e) //добавить в корзину
         {
             if (dataGridView1.CurrentRow == null)
@@ -280,7 +213,7 @@ namespace ShopTrade
             //dataset2 = dataGridView2.DataSource;
             // dataset2.WriteXml("1.xml");//сериализовать в файл все данные из датасет
         }
-
+        /// ////////////////////////////
         private void Button2_Click(object sender, EventArgs e)//оплата
         {
             //dataGridView2.DataSource = ds.Tables[0];
@@ -296,18 +229,21 @@ namespace ShopTrade
             { n = 0; tv = 0; }
             else { ds.WriteXml("1.xml"); }
         }
-
+        /// ////////////////////////////
         private void TextBox1_TextChanged(object sender, EventArgs e)
         {
 
         }
-
-        private void EditProduct_Click(object sender, EventArgs e)
+        /// ////////////////////////////
+        private void EditProduct_Click(object sender, EventArgs e)//Редактировать
         {
-
+            int ind = dataGridView1.CurrentRow.Index;
+            int PrId = int.Parse(dataGridView1.Rows[ind].Cells[0].Value.ToString());
+            Password formP = new Password(PrId);
+            formP.ShowDialog();
         }
-
-        private void DelProduct_Click(object sender, EventArgs e)
+        /// ////////////////////////////
+        private void DelProduct_Click(object sender, EventArgs e)//Удалить продукт
         {
             if (dataGridView1.CurrentRow != null)
             {
@@ -338,8 +274,7 @@ namespace ShopTrade
                 //this.Close();
             }
         }
-
-        private void Button4_Click(object sender, EventArgs e)
+        private void Button4_Click(object sender, EventArgs e)//Удалить из корзины
         {
            
             if (n != 0)
@@ -359,24 +294,108 @@ namespace ShopTrade
                 formD.ShowDialog();
             }
         }
-
-        private void InfoDay_Click(object sender, EventArgs e)
+        /// ////////////////////////////Итоги
+        private void InfoDay_Click(object sender, EventArgs e)//Помощь
         {
-            DayResults formD = new DayResults();
-            formD.ShowDialog();
+            Result1 formR = new Result1();
+            formR.ShowDialog();
         }
-
-        private void Help_Click(object sender, EventArgs e)
+        /// ////////////////////////////Помощь
+        private void Help_Click(object sender, EventArgs e)//Краски
         {
-            DataTable dTable = new DataTable();
-            String sqlQuery = "DELETE FROM Baskets; ";
-            SQLiteDataAdapter adapter = new SQLiteDataAdapter(sqlQuery, m_dbConn);
+        
         }
-
+        /// ////////////////////////////Краски
         private void КраскиToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Colors formС = new Colors();
             formС.ShowDialog();
+        }
+        /// ////////////////////////////
+        private void MainMenu_KeyDown(object sender, KeyEventArgs e)
+        {
+           
+        }
+        /// ////////////////////////////
+        private void DataGridView1_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
+        {
+           
+        }
+        /// ////////////////////////////Поиск
+        private void TextBox1_KeyPress(object sender, KeyEventArgs e)//Поиск
+        {
+            DateTime OpenD = new DateTime();
+            StreamReader sr = new StreamReader(@"dd.ddd");
+            OpenD = DateTime.Parse(sr.ReadToEnd());
+            sr.Close();
+            m_dbConn = new SQLiteConnection();
+            m_sqlCmd = new SQLiteCommand();
+
+            if (OpenD.DayOfYear != DateTime.Today.DayOfYear)
+            {
+                Warning2NewDay form6 = new Warning2NewDay();
+                form6.ShowDialog();
+            }
+            else
+            {
+
+                try
+                {
+                    m_dbConn = new SQLiteConnection("Data Source=" + dbFileName + ";Version=3;");
+                    m_dbConn.Open();
+                    m_sqlCmd.Connection = m_dbConn;
+                }
+                catch (SQLiteException ex)
+                {
+                    MessageBox.Show("Error: " + ex.Message);
+                }
+
+                DataTable dTable = new DataTable();
+                String sqlQuery;
+                if (m_dbConn.State != ConnectionState.Open)
+                {
+                    MessageBox.Show("Open connection with database");
+                    return;
+                }
+
+                try
+                {
+                    sqlQuery = "SELECT * FROM Products";
+                    SQLiteDataAdapter adapter = new SQLiteDataAdapter(sqlQuery, m_dbConn);
+                    adapter.Fill(dTable);
+                    dataGridView1.DataSource = dTable;
+                    //for (int i = 0; i < dTable.Rows.Count; i++)
+                    //  dataGridView1.Rows.Add(dTable.Rows[i].ItemArray);
+
+                }
+                catch (SQLiteException ex)
+                {
+                    MessageBox.Show("Error: " + ex.Message);
+                }
+                //  this.productsTableAdapter.Fill(this.DBSDataSet1.Products);
+                // dataGridView1.DataSource = DBSDataSet1.Products;
+
+                for (int i = 0; i < dataGridView1.RowCount; i++)
+                {
+                    dataGridView1.Rows[i].Selected = false;
+                    for (int j = 0; j < dataGridView1.ColumnCount; j++)
+                        if (dataGridView1.Rows[i].Cells[j].Value != null)
+                            if (dataGridView1.Rows[i].Cells[j].Value.ToString().ToLower().Contains(textBox1.Text.ToLower()))
+                            {
+                                dataGridView1.Rows[i].Selected = true;
+                                dataGridView1.FirstDisplayedScrollingRowIndex = i;
+                                break;
+                            }
+                }
+
+            }
+            dt1 = ((DataTable)dataGridView1.DataSource).Clone();
+        }
+
+        private void НастройкиToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Settings S = new Settings();
+            S.ShowDialog();
         }
     }
 }

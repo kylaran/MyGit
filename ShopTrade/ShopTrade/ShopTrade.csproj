@@ -110,6 +110,12 @@
     <Compile Include="AttCloseDay.Designer.cs">
       <DependentUpon>AttCloseDay.cs</DependentUpon>
     </Compile>
+    <Compile Include="ChPas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChPas.Designer.cs">
+      <DependentUpon>ChPas.cs</DependentUpon>
+    </Compile>
     <Compile Include="CloseDay.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -122,17 +128,16 @@
     <Compile Include="Colors.Designer.cs">
       <DependentUpon>Colors.cs</DependentUpon>
     </Compile>
-    <Compile Include="DayResults.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="DayResults.Designer.cs">
-      <DependentUpon>DayResults.cs</DependentUpon>
-    </Compile>
-    <Compile Include="DbIni.cs" />
     <Compile Include="DBSDataSet1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>DBSDataSet1.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="EditProduct.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditProduct.Designer.cs">
+      <DependentUpon>EditProduct.cs</DependentUpon>
     </Compile>
     <Compile Include="MainMenu.cs">
       <SubType>Form</SubType>
@@ -145,6 +150,12 @@
     </Compile>
     <Compile Include="NewDay.Designer.cs">
       <DependentUpon>NewDay.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Password.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Password.Designer.cs">
+      <DependentUpon>Password.cs</DependentUpon>
     </Compile>
     <Compile Include="Payment.cs">
       <SubType>Form</SubType>
@@ -165,6 +176,18 @@
     </Compile>
     <Compile Include="AddInBask.Designer.cs">
       <DependentUpon>AddInBask.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Result1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Result1.Designer.cs">
+      <DependentUpon>Result1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Settings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Settings.Designer.cs">
+      <DependentUpon>Settings.cs</DependentUpon>
     </Compile>
     <Compile Include="Warning2NewDay.cs">
       <SubType>Form</SubType>
@@ -193,14 +216,17 @@
     <EmbeddedResource Include="AttCloseDay.resx">
       <DependentUpon>AttCloseDay.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ChPas.resx">
+      <DependentUpon>ChPas.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CloseDay.resx">
       <DependentUpon>CloseDay.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Colors.resx">
       <DependentUpon>Colors.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="DayResults.resx">
-      <DependentUpon>DayResults.cs</DependentUpon>
+    <EmbeddedResource Include="EditProduct.resx">
+      <DependentUpon>EditProduct.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainMenu.resx">
       <DependentUpon>MainMenu.cs</DependentUpon>
@@ -208,6 +234,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="NewDay.resx">
       <DependentUpon>NewDay.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Password.resx">
+      <DependentUpon>Password.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Payment.resx">
       <DependentUpon>Payment.cs</DependentUpon>
@@ -226,6 +255,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AddInBask.resx">
       <DependentUpon>AddInBask.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Result1.resx">
+      <DependentUpon>Result1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Settings.resx">
+      <DependentUpon>Settings.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Warning2NewDay.resx">
       <DependentUpon>Warning2NewDay.cs</DependentUpon>

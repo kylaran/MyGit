@@ -28,6 +28,7 @@ namespace ShopTrade
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             InitializeComponent();
             this.data = data;
+            this.KeyPreview = true;
         }
 
         private void Button3_Click(object sender, EventArgs e)
@@ -39,7 +40,7 @@ namespace ShopTrade
             ff = true;
         }
 
-        private void Button1_Click(object sender, EventArgs e)
+        private void Button1_Click(object sender, EventArgs e)//Наличные
         {
             m_dbConn = new SQLiteConnection();
             m_sqlCmd = new SQLiteCommand();
@@ -99,7 +100,7 @@ namespace ShopTrade
         {
         }
 
-        private void Button2_Click(object sender, EventArgs e)
+        private void Button2_Click(object sender, EventArgs e)//Безнал
         {
             m_dbConn = new SQLiteConnection();
             m_sqlCmd = new SQLiteCommand();
@@ -153,9 +154,74 @@ namespace ShopTrade
 
         private void Payment_Load(object sender, EventArgs e)
         {
+            button4.Visible = false;
+            label1.Text = "К ОПЛАТЕ: " + (data).ToString();
 
-                label1.Text = "К ОПЛАТЕ: " + (data).ToString();
+        }
 
+        private void Payment_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.E && e.Control)
+            {
+                button4.Visible = true;
+            }
+        }
+
+        private void Payment_KeyPress(object sender, KeyPressEventArgs e)
+        {
+           
+        }
+
+        private void Button4_Click(object sender, EventArgs e)//Списание
+        {
+            m_dbConn = new SQLiteConnection();
+            m_sqlCmd = new SQLiteCommand();
+            m_dbConn = new SQLiteConnection("Data Source=" + dbFileName + ";Version=3;");
+            m_dbConn.Open();
+            m_sqlCmd.Connection = m_dbConn;
+            DateTime DT = DateTime.Now;
+            float QuPr = 0;
+            MainMenu form2 = this.Owner as MainMenu;
+            form2.label3.Text = "К ОПЛАТЕ: 0";
+            while (form2.dataGridView2.Rows.Count > 1)
+                for (int i = 0; i < form2.dataGridView2.Rows.Count - 1; i++)
+                {
+                    int qu = int.Parse(form2.dataGridView2[2, i].Value.ToString());
+                    string nam;
+                    nam = form2.dataGridView2.Rows[i].Cells[0].Value.ToString();
+                    DataTable dTable = new DataTable();
+                    try
+                    {
+                        m_sqlCmd.CommandText = "UPDATE Products " +
+                                        "SET Quantity = Quantity - " + qu +
+                                         " WHERE Name = '" + nam + "';";
+
+                        m_sqlCmd.ExecuteNonQuery();
+                    }
+                    catch (SQLiteException ex)
+                    {
+                        MessageBox.Show("Error: " + ex.Message);
+                    }
+                    QuPr = 0;
+                    try
+                    {
+                        m_sqlCmd.CommandText = "INSERT INTO Baskets ('Name', 'Country', 'Quantity', 'DateTrade', 'Price', 'BuyersID') values ('" +
+                            form2.dataGridView2[0, i].Value + "' , '" + //наименование
+                            form2.dataGridView2[1, i].Value + "' , '" + //страна
+                            form2.dataGridView2[2, i].Value + "' , '" + //количество
+                            DT + "' , '" + //дата продажи
+                            QuPr + "' , '" + //цена
+                            03 + "')"; //BuyersID Списание
+
+                        m_sqlCmd.ExecuteNonQuery();
+                    }
+                    catch (SQLiteException ex)
+                    {
+                        MessageBox.Show("Error: " + ex.Message);
+                    }
+                    form2.dataGridView2.Rows.Remove(form2.dataGridView2.Rows[i]);
+                }
+            this.Close();
         }
     }
 }

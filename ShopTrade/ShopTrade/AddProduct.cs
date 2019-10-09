@@ -38,9 +38,8 @@ namespace ShopTrade
         }
         private void Button2_Click(object sender, EventArgs e)
         {
-            MainMenu form2 = new MainMenu();
             this.Hide();
-            form2.ShowDialog();
+
             this.Close();
         }
      

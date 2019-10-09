@@ -43,10 +43,10 @@
             this.EntProduct = new System.Windows.Forms.ToolStripMenuItem();
             this.EditProduct = new System.Windows.Forms.ToolStripMenuItem();
             this.DelProduct = new System.Windows.Forms.ToolStripMenuItem();
+            this.краскиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Help = new System.Windows.Forms.ToolStripMenuItem();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.ProductId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -69,7 +69,10 @@
             this.productsTableAdapter1 = new ShopTrade.DBSDataSet1TableAdapters.ProductsTableAdapter();
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
-            this.краскиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.редактироватьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.удалитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.настройкиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ContextMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.productsBindingSource1)).BeginInit();
@@ -78,6 +81,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.basketsBindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.basketsBindingSource)).BeginInit();
+            this.contextMenuStrip2.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -86,19 +90,19 @@
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label1.Location = new System.Drawing.Point(15, 250);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(81, 20);
+            this.label1.Size = new System.Drawing.Size(59, 20);
             this.label1.TabIndex = 1;
-            this.label1.Text = "Поиск по:";
+            this.label1.Text = "Поиск:";
             // 
             // textBox1
             // 
             this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBox1.Location = new System.Drawing.Point(245, 250);
+            this.textBox1.Location = new System.Drawing.Point(76, 250);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(525, 26);
+            this.textBox1.Size = new System.Drawing.Size(694, 26);
             this.textBox1.TabIndex = 2;
             this.textBox1.TextChanged += new System.EventHandler(this.TextBox1_TextChanged);
-            this.textBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBox1_KeyPress);
+            this.textBox1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TextBox1_KeyPress);
             // 
             // button2
             // 
@@ -139,6 +143,7 @@
             this.OpenDay.Name = "OpenDay";
             this.OpenDay.Size = new System.Drawing.Size(180, 22);
             this.OpenDay.Text = "Открыть день";
+            this.OpenDay.Visible = false;
             this.OpenDay.Click += new System.EventHandler(this.OpenDay_Click);
             // 
             // CloseDay
@@ -146,13 +151,14 @@
             this.CloseDay.Name = "CloseDay";
             this.CloseDay.Size = new System.Drawing.Size(180, 22);
             this.CloseDay.Text = "Закрыть день";
+            this.CloseDay.Visible = false;
             this.CloseDay.Click += new System.EventHandler(this.CloseDay_Click);
             // 
             // InfoDay
             // 
             this.InfoDay.Name = "InfoDay";
             this.InfoDay.Size = new System.Drawing.Size(180, 22);
-            this.InfoDay.Text = "Итоги дня";
+            this.InfoDay.Text = "Итоги";
             this.InfoDay.Click += new System.EventHandler(this.InfoDay_Click);
             // 
             // Exit
@@ -176,26 +182,35 @@
             // EntProduct
             // 
             this.EntProduct.Name = "EntProduct";
-            this.EntProduct.Size = new System.Drawing.Size(180, 22);
+            this.EntProduct.Size = new System.Drawing.Size(163, 22);
             this.EntProduct.Text = "Ввод";
             this.EntProduct.Click += new System.EventHandler(this.EntProduct_Click);
             // 
             // EditProduct
             // 
             this.EditProduct.Name = "EditProduct";
-            this.EditProduct.Size = new System.Drawing.Size(180, 22);
+            this.EditProduct.Size = new System.Drawing.Size(163, 22);
             this.EditProduct.Text = "Редактирование";
             this.EditProduct.Click += new System.EventHandler(this.EditProduct_Click);
             // 
             // DelProduct
             // 
             this.DelProduct.Name = "DelProduct";
-            this.DelProduct.Size = new System.Drawing.Size(180, 22);
+            this.DelProduct.Size = new System.Drawing.Size(163, 22);
             this.DelProduct.Text = "Удаление";
             this.DelProduct.Click += new System.EventHandler(this.DelProduct_Click);
             // 
+            // краскиToolStripMenuItem
+            // 
+            this.краскиToolStripMenuItem.Name = "краскиToolStripMenuItem";
+            this.краскиToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
+            this.краскиToolStripMenuItem.Text = "Краски";
+            this.краскиToolStripMenuItem.Click += new System.EventHandler(this.КраскиToolStripMenuItem_Click);
+            // 
             // Help
             // 
+            this.Help.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.настройкиToolStripMenuItem});
             this.Help.Name = "Help";
             this.Help.Size = new System.Drawing.Size(68, 20);
             this.Help.Text = "Помощь";
@@ -220,19 +235,6 @@
             this.label3.TabIndex = 12;
             this.label3.Text = "К ОПЛАТЕ: 0";
             // 
-            // comboBox1
-            // 
-            this.comboBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "Наименованию",
-            "Цене",
-            "Артикулу"});
-            this.comboBox1.Location = new System.Drawing.Point(94, 248);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(145, 28);
-            this.comboBox1.TabIndex = 13;
-            // 
             // dataGridView1
             // 
             this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -252,6 +254,7 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(751, 214);
             this.dataGridView1.TabIndex = 14;
+            this.dataGridView1.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DataGridView1_CellMouseDown);
             // 
             // ProductId
             // 
@@ -392,12 +395,34 @@
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.Button4_Click);
             // 
-            // краскиToolStripMenuItem
+            // contextMenuStrip2
             // 
-            this.краскиToolStripMenuItem.Name = "краскиToolStripMenuItem";
-            this.краскиToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.краскиToolStripMenuItem.Text = "Краски";
-            this.краскиToolStripMenuItem.Click += new System.EventHandler(this.КраскиToolStripMenuItem_Click);
+            this.contextMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.редактироватьToolStripMenuItem,
+            this.удалитьToolStripMenuItem});
+            this.contextMenuStrip2.Name = "contextMenuStrip2";
+            this.contextMenuStrip2.Size = new System.Drawing.Size(155, 48);
+            // 
+            // редактироватьToolStripMenuItem
+            // 
+            this.редактироватьToolStripMenuItem.Name = "редактироватьToolStripMenuItem";
+            this.редактироватьToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.редактироватьToolStripMenuItem.Text = "Редактировать";
+            this.редактироватьToolStripMenuItem.Click += new System.EventHandler(this.EditProduct_Click);
+            // 
+            // удалитьToolStripMenuItem
+            // 
+            this.удалитьToolStripMenuItem.Name = "удалитьToolStripMenuItem";
+            this.удалитьToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.удалитьToolStripMenuItem.Text = "Удалить";
+            this.удалитьToolStripMenuItem.Click += new System.EventHandler(this.DelProduct_Click);
+            // 
+            // настройкиToolStripMenuItem
+            // 
+            this.настройкиToolStripMenuItem.Name = "настройкиToolStripMenuItem";
+            this.настройкиToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.настройкиToolStripMenuItem.Text = "Настройки";
+            this.настройкиToolStripMenuItem.Click += new System.EventHandler(this.НастройкиToolStripMenuItem_Click);
             // 
             // MainMenu
             // 
@@ -408,7 +433,6 @@
             this.Controls.Add(this.button3);
             this.Controls.Add(this.dataGridView2);
             this.Controls.Add(this.dataGridView1);
-            this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.button2);
@@ -421,6 +445,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Магазин";
             this.Load += new System.EventHandler(this.MainMenu_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MainMenu_KeyDown);
             this.Resize += new System.EventHandler(this.MainMenu_Resize);
             this.ContextMenu.ResumeLayout(false);
             this.ContextMenu.PerformLayout();
@@ -431,6 +456,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.basketsBindingSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.basketsBindingSource)).EndInit();
+            this.contextMenuStrip2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -453,8 +479,6 @@
         private System.Windows.Forms.ToolStripMenuItem DelProduct;
         private System.Windows.Forms.Label label2;
         public System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.DataGridView dataGridView1;
         public System.Windows.Forms.DataGridView dataGridView2;
         private System.Windows.Forms.BindingSource DBSDataSet1BindingSource;
         private DBSDataSet1 DBSDataSet1;
@@ -478,6 +502,11 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn quantityD2;
         private System.Windows.Forms.DataGridViewTextBoxColumn priceD2;
         private System.Windows.Forms.ToolStripMenuItem краскиToolStripMenuItem;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip2;
+        private System.Windows.Forms.ToolStripMenuItem редактироватьToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem удалитьToolStripMenuItem;
+        public System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.ToolStripMenuItem настройкиToolStripMenuItem;
     }
 }
 

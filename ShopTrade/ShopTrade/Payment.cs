@@ -180,7 +180,6 @@ namespace ShopTrade
             m_dbConn.Open();
             m_sqlCmd.Connection = m_dbConn;
             DateTime DT = DateTime.Now;
-            float QuPr = 0;
             MainMenu form2 = this.Owner as MainMenu;
             form2.label3.Text = "К ОПЛАТЕ: 0";
             while (form2.dataGridView2.Rows.Count > 1)
@@ -202,7 +201,6 @@ namespace ShopTrade
                     {
                         MessageBox.Show("Error: " + ex.Message);
                     }
-                    QuPr = 0;
                     try
                     {
                         m_sqlCmd.CommandText = "INSERT INTO Baskets ('Name', 'Country', 'Quantity', 'DateTrade', 'Price', 'BuyersID') values ('" +
@@ -210,7 +208,7 @@ namespace ShopTrade
                             form2.dataGridView2[1, i].Value + "' , '" + //страна
                             form2.dataGridView2[2, i].Value + "' , '" + //количество
                             DT + "' , '" + //дата продажи
-                            QuPr + "' , '" + //цена
+                            0 + "' , '" + //цена
                             03 + "')"; //BuyersID Списание
 
                         m_sqlCmd.ExecuteNonQuery();

@@ -25,16 +25,45 @@ namespace ShopTrade
         readonly DataSet ds = new DataSet();
         readonly DataTable dt = new DataTable();
         public double tv = 0;
-       // readonly int SellN = 0;
-
-        public class BasContext : DbContext
+        // readonly int SellN = 0;
+        public void LoadBase(DataGridView dg)
         {
+                m_dbConn = new SQLiteConnection();
+                m_sqlCmd = new SQLiteCommand();
+                try
+                {
+                    m_dbConn = new SQLiteConnection("Data Source=" + dbFileName + ";Version=3;");
+                    m_dbConn.Open();
+                    m_sqlCmd.Connection = m_dbConn;
+                }
+                catch (SQLiteException ex)
+                {
+                    MessageBox.Show("Error: " + ex.Message);
+                }
 
-            public BasContext()
-                : base("DBConnection")
-            { }
+                DataTable dTable = new DataTable();
+                String sqlQuery;
+                if (m_dbConn.State != ConnectionState.Open)
+                {
+                    MessageBox.Show("Open connection with database");
+                    return;
+                }
 
-            public DbSet<Basket> Baskets { get; set; }
+                try
+                {
+                    sqlQuery = "SELECT * FROM Products";
+                    SQLiteDataAdapter adapter = new SQLiteDataAdapter(sqlQuery, m_dbConn);
+                    adapter.Fill(dTable);
+                    dg.DataSource = dTable;
+                    //for (int i = 0; i < dTable.Rows.Count; i++)
+                    //  dataGridView1.Rows.Add(dTable.Rows[i].ItemArray);
+
+                }
+                catch (SQLiteException ex)
+                {
+                    MessageBox.Show("Error: " + ex.Message);
+                }
+            dt1 = ((DataTable)dataGridView1.DataSource).Clone();
         }
         public MainMenu()
         {
@@ -145,9 +174,9 @@ namespace ShopTrade
         {
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridView1.Columns["ProductId"].Visible = false;
-            m_dbConn = new SQLiteConnection();
-            m_sqlCmd = new SQLiteCommand();
+           
             dataGridView1.ContextMenuStrip = contextMenuStrip2;
+            LoadBase(dataGridView1);
         }
         /// ////////////////////////////
         private void TextBox1_KeyPress(object sender, KeyPressEventArgs e)
@@ -245,26 +274,13 @@ namespace ShopTrade
         /// ////////////////////////////
         private void DelProduct_Click(object sender, EventArgs e)//Удалить продукт
         {
+
             if (dataGridView1.CurrentRow != null)
             {
-                int prID;
                 int ind = dataGridView1.CurrentRow.Index;
-                prID = int.Parse(dataGridView1.Rows[ind].Cells[0].Value.ToString());
-                DataTable dTable = new DataTable();
-                String sqlQuery = "DELETE FROM Products " +
-                    "WHERE productId = " + prID + ";";
-                SQLiteDataAdapter adapter = new SQLiteDataAdapter(sqlQuery, m_dbConn);
-                adapter.Fill(dTable);
-                sqlQuery = "SELECT * FROM Products";
-                SQLiteDataAdapter adapter2 = new SQLiteDataAdapter(sqlQuery, m_dbConn);
-                adapter2.Fill(dTable);
-                dataGridView1.DataSource = dTable;
-
-                //  DBSDataSet1.Products.Rows.RemoveAt(ind);
-                // productsTableAdapter.Update(DBSDataSet1.Products);
-              //  dataGridView1.DataSource = DBSDataSet1.Products;
-               // DataRow row = DBSDataSet1.Products.Rows[ind];
-               // DBSDataSet1.Products.Rows.Remove(row);
+                int PrId = int.Parse(dataGridView1.Rows[ind].Cells[0].Value.ToString());
+                PasswordD formP = new PasswordD(PrId);
+                formP.ShowDialog();
             }
             else
             {
@@ -286,6 +302,7 @@ namespace ShopTrade
                 tv -= double.Parse(dataGridView2.Rows[dataGridView2.CurrentRow.Index].Cells[3].Value.ToString()) * qua;
                 dataGridView2.Rows.Remove(dataGridView2.Rows[dataGridView2.CurrentRow.Index]);
                 label3.Text = " К ОПЛАТЕ: " + tv;
+                LoadBase(dataGridView1);
             }
             else
             {
@@ -324,77 +341,70 @@ namespace ShopTrade
         /// ////////////////////////////Поиск
         private void TextBox1_KeyPress(object sender, KeyEventArgs e)//Поиск
         {
-            DateTime OpenD = new DateTime();
-            StreamReader sr = new StreamReader(@"dd.ddd");
-            OpenD = DateTime.Parse(sr.ReadToEnd());
-            sr.Close();
-            m_dbConn = new SQLiteConnection();
-            m_sqlCmd = new SQLiteCommand();
-
-            if (OpenD.DayOfYear != DateTime.Today.DayOfYear)
-            {
-                Warning2NewDay form6 = new Warning2NewDay();
-                form6.ShowDialog();
-            }
-            else
-            {
-
-                try
-                {
-                    m_dbConn = new SQLiteConnection("Data Source=" + dbFileName + ";Version=3;");
-                    m_dbConn.Open();
-                    m_sqlCmd.Connection = m_dbConn;
-                }
-                catch (SQLiteException ex)
-                {
-                    MessageBox.Show("Error: " + ex.Message);
-                }
-
-                DataTable dTable = new DataTable();
-                String sqlQuery;
-                if (m_dbConn.State != ConnectionState.Open)
-                {
-                    MessageBox.Show("Open connection with database");
-                    return;
-                }
-
-                try
-                {
-                    sqlQuery = "SELECT * FROM Products";
-                    SQLiteDataAdapter adapter = new SQLiteDataAdapter(sqlQuery, m_dbConn);
-                    adapter.Fill(dTable);
-                    dataGridView1.DataSource = dTable;
-                    //for (int i = 0; i < dTable.Rows.Count; i++)
-                    //  dataGridView1.Rows.Add(dTable.Rows[i].ItemArray);
-
-                }
-                catch (SQLiteException ex)
-                {
-                    MessageBox.Show("Error: " + ex.Message);
-                }
-                //  this.productsTableAdapter.Fill(this.DBSDataSet1.Products);
-                // dataGridView1.DataSource = DBSDataSet1.Products;
+            int n = 0;
 
                 for (int i = 0; i < dataGridView1.RowCount; i++)
                 {
-                    dataGridView1.Rows[i].Selected = false;
-                    for (int j = 0; j < dataGridView1.ColumnCount; j++)
-                        if (dataGridView1.Rows[i].Cells[j].Value != null)
-                            if (dataGridView1.Rows[i].Cells[j].Value.ToString().ToLower().Contains(textBox1.Text.ToLower()))
-                            {
-                                dataGridView1.Rows[i].Selected = true;
-                                dataGridView1.FirstDisplayedScrollingRowIndex = i;
-                                break;
-                            }
-                }
+                    var Row = dataGridView1.Rows[i];
+                    Row.Selected = false;
 
+                for (int j = 0; j < dataGridView1.ColumnCount; j++)
+                {
+                    if (Row.Cells[j].Value != null)
+                    {
+                        if (Row.Cells[j].Value.ToString().ToLower() == (textBox1.Text.ToLower()))
+                        {
+                            n = 1;
+                            Row.Selected = true;
+                            dataGridView1.FirstDisplayedScrollingRowIndex = i;
+                        }
+                    }
+                }
             }
+                if (n == 0)
+            for (int i = 0; i < dataGridView1.RowCount; i++)
+            {
+                var Row = dataGridView1.Rows[i];
+                Row.Selected = false;
+
+                    for (int j = 0; j < dataGridView1.ColumnCount; j++)
+                    {
+                        if (Row.Cells[j].Value != null)
+                        {
+                            if (Row.Cells[j].Value.ToString().ToLower().Contains(textBox1.Text.ToLower()))
+                            {
+                                n = 1;
+                                Row.Selected = true;
+                                dataGridView1.FirstDisplayedScrollingRowIndex = i;
+                            }
+                        }
+                    }
+            }
+                
+
             dt1 = ((DataTable)dataGridView1.DataSource).Clone();
         }
 
         private void НастройкиToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Settings S = new Settings();
+            S.ShowDialog();
+        }
+
+        private void ОПрограммеToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            About S = new About();
+            S.ShowDialog();
+        }
+
+        private void MainMenu_Activated(object sender, EventArgs e)
+        {
+            LoadBase(dataGridView1);
+        }
+
+        private void ПечатьЦенниковToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            PrintPr S = new PrintPr();
             S.ShowDialog();
         }
     }

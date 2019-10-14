@@ -11,12 +11,29 @@ using System.Data.Sql;
 using System.IO;
 using System.Data.SQLite;
 using System.Data.Entity;
+using System.Diagnostics;
 
 namespace ShopTrade
 {
     public partial class MainMenu : Form
     {
+
         
+       string s1 = "<table border = \"2\" cellpadding=\"1\" cellspacing=\"1\" style=\"width: 740px; border-style: solid;border-color: black;\">";
+       string s2 = "<tbody>";
+       string s3 = "<tr>";
+       string cn1 = "<td style = \"width: 350px;max-width:350px;\"><font size=\"3\"><font face=\"Arial, Helvetica, sans-serif\">"; //Название
+       string cn2 = "</font></font></td>";
+       string ca1 = "<td style = \"width: 200px;max-width:200px;\"><font size=\"3\"><font face=\"Arial, Helvetica, sans-serif\">";//Артикул
+       string ca2 = "</font></font></td>"; //Артикул
+       string cq1 = "<td style = \"width: 100px;max-width:100px;\"><font size=\"3\"><font face=\"Arial, Helvetica, sans-serif\">"; // количество
+       string cq2 = "</font></font></td>"; // количество
+       string cp1 = "<td style = \"width: 90px;max-width:90px;\"><font size=\"3\"><font face=\"Arial, Helvetica, sans-serif\">"; //Цена
+       string cp2 = "</font></font></td>"; //Цена
+       string s4 = "</tr>";
+       string s5 = "</tbody>";
+       string s6 = "</table>";
+
         private readonly String dbFileName = "ShopTrade.db";
         private SQLiteConnection m_dbConn;
         private SQLiteCommand m_sqlCmd;
@@ -406,6 +423,59 @@ namespace ShopTrade
         {
             PrintPr S = new PrintPr();
             S.ShowDialog();
+        }
+
+        private void ПереучётToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int count = dataGridView1.Rows.Count;
+
+            StreamWriter sw = new StreamWriter(@"full.html");
+            sw.WriteLine(s1);
+            sw.WriteLine(s2);
+            /////////////////////////////////////////////////////////
+            sw.WriteLine(s3); //начало строки таблицы
+
+            sw.WriteLine(cn1 + "Наименование" + cn2);//название 
+
+            sw.WriteLine(ca1 + "Артикул" + ca2);//название 
+
+            sw.WriteLine(cq1 + "Количество" + cq2);//название 
+
+            sw.WriteLine(cp1 + "Цена" + cp2);//название 
+
+
+            for (int i = 0; i <= count - 2; i++)
+                    {
+
+                        string name = dataGridView1[1, i].Value.ToString();
+                        string art = dataGridView1[2, i].Value.ToString();
+                        int quan = int.Parse(dataGridView1[3, i].Value.ToString());
+                        float price = float.Parse(dataGridView1[5, i].Value.ToString());
+
+                    /////////////////////////////////////////////////////////
+                    sw.WriteLine(s3); //начало строки таблицы
+
+                    sw.WriteLine(cn1 + name + cn2);//название 
+
+                    sw.WriteLine(ca1 + art + ca2);//артикул 
+                ///
+                if (quan <= 0)
+                {
+                    sw.WriteLine(cq1 + "||&nbsp;" + quan + "&nbsp;||" + cq2);//количество
+
+                }
+                else sw.WriteLine(cq1 + quan + cq2);//количество
+                ///
+                     sw.WriteLine(cp1 + price + "&nbsp; руб." + cp2);//цена
+
+                     sw.WriteLine(s4); //конец строки таблицы
+
+                                        ////////////////////////////////////////////////////////////
+            }
+            sw.WriteLine(s5); // конец таблицы
+            sw.WriteLine(s6); // пустая строка
+            sw.Close();
+            Process.Start("full.html");
         }
     }
 }

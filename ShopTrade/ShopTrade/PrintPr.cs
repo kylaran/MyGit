@@ -407,5 +407,53 @@ namespace ShopTrade
 
 
         }
+
+        private void TextBox1_KeyUp(object sender, KeyEventArgs e)
+        {
+
+                int n = 0;
+
+                for (int i = 0; i < dataGridView1.RowCount; i++)
+                {
+                    var Row = dataGridView1.Rows[i];
+                    Row.Selected = false;
+
+                    for (int j = 0; j < dataGridView1.ColumnCount; j++)
+                    {
+                        if (Row.Cells[j].Value != null)
+                        {
+                            if (Row.Cells[j].Value.ToString().ToLower() == (textBox1.Text.ToLower()))
+                            {
+                                n = 1;
+                                Row.Selected = true;
+                                dataGridView1.FirstDisplayedScrollingRowIndex = i;
+                            }
+                        }
+                    }
+                }
+                if (n == 0)
+                    for (int i = 0; i < dataGridView1.RowCount; i++)
+                    {
+                        var Row = dataGridView1.Rows[i];
+                        Row.Selected = false;
+
+                        for (int j = 0; j < dataGridView1.ColumnCount; j++)
+                        {
+                            if (Row.Cells[j].Value != null)
+                            {
+                                if (Row.Cells[j].Value.ToString().ToLower().Contains(textBox1.Text.ToLower()))
+                                {
+                                    n = 1;
+                                    Row.Selected = true;
+                                    dataGridView1.FirstDisplayedScrollingRowIndex = i;
+                                }
+                            }
+                        }
+                    }
+
+
+                dt1 = ((DataTable)dataGridView1.DataSource).Clone();
+            
+        }
     }
 }

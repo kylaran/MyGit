@@ -47,6 +47,9 @@
             this.Help = new System.Windows.Forms.ToolStripMenuItem();
             this.настройкиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.оПрограммеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.печатьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.печатьЦенниковToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.переучётToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
@@ -74,9 +77,6 @@
             this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.редактироватьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.удалитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.печатьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.печатьЦенниковToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.переучётToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ContextMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.productsBindingSource1)).BeginInit();
@@ -146,7 +146,7 @@
             // OpenDay
             // 
             this.OpenDay.Name = "OpenDay";
-            this.OpenDay.Size = new System.Drawing.Size(180, 22);
+            this.OpenDay.Size = new System.Drawing.Size(149, 22);
             this.OpenDay.Text = "Открыть день";
             this.OpenDay.Visible = false;
             this.OpenDay.Click += new System.EventHandler(this.OpenDay_Click);
@@ -154,7 +154,7 @@
             // CloseDay
             // 
             this.CloseDay.Name = "CloseDay";
-            this.CloseDay.Size = new System.Drawing.Size(180, 22);
+            this.CloseDay.Size = new System.Drawing.Size(149, 22);
             this.CloseDay.Text = "Закрыть день";
             this.CloseDay.Visible = false;
             this.CloseDay.Click += new System.EventHandler(this.CloseDay_Click);
@@ -162,14 +162,14 @@
             // InfoDay
             // 
             this.InfoDay.Name = "InfoDay";
-            this.InfoDay.Size = new System.Drawing.Size(180, 22);
+            this.InfoDay.Size = new System.Drawing.Size(149, 22);
             this.InfoDay.Text = "Итоги";
             this.InfoDay.Click += new System.EventHandler(this.InfoDay_Click);
             // 
             // Exit
             // 
             this.Exit.Name = "Exit";
-            this.Exit.Size = new System.Drawing.Size(180, 22);
+            this.Exit.Size = new System.Drawing.Size(149, 22);
             this.Exit.Text = "Выход";
             this.Exit.Click += new System.EventHandler(this.Exit_Click);
             // 
@@ -187,28 +187,28 @@
             // EntProduct
             // 
             this.EntProduct.Name = "EntProduct";
-            this.EntProduct.Size = new System.Drawing.Size(180, 22);
+            this.EntProduct.Size = new System.Drawing.Size(163, 22);
             this.EntProduct.Text = "Ввод";
             this.EntProduct.Click += new System.EventHandler(this.EntProduct_Click);
             // 
             // EditProduct
             // 
             this.EditProduct.Name = "EditProduct";
-            this.EditProduct.Size = new System.Drawing.Size(180, 22);
+            this.EditProduct.Size = new System.Drawing.Size(163, 22);
             this.EditProduct.Text = "Редактирование";
             this.EditProduct.Click += new System.EventHandler(this.EditProduct_Click);
             // 
             // DelProduct
             // 
             this.DelProduct.Name = "DelProduct";
-            this.DelProduct.Size = new System.Drawing.Size(180, 22);
+            this.DelProduct.Size = new System.Drawing.Size(163, 22);
             this.DelProduct.Text = "Удаление";
             this.DelProduct.Click += new System.EventHandler(this.DelProduct_Click);
             // 
             // краскиToolStripMenuItem
             // 
             this.краскиToolStripMenuItem.Name = "краскиToolStripMenuItem";
-            this.краскиToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.краскиToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
             this.краскиToolStripMenuItem.Text = "Краски";
             this.краскиToolStripMenuItem.Click += new System.EventHandler(this.КраскиToolStripMenuItem_Click);
             // 
@@ -235,6 +235,29 @@
             this.оПрограммеToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.оПрограммеToolStripMenuItem.Text = "О программе";
             this.оПрограммеToolStripMenuItem.Click += new System.EventHandler(this.ОПрограммеToolStripMenuItem_Click);
+            // 
+            // печатьToolStripMenuItem
+            // 
+            this.печатьToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.печатьЦенниковToolStripMenuItem,
+            this.переучётToolStripMenuItem});
+            this.печатьToolStripMenuItem.Name = "печатьToolStripMenuItem";
+            this.печатьToolStripMenuItem.Size = new System.Drawing.Size(58, 20);
+            this.печатьToolStripMenuItem.Text = "Печать";
+            // 
+            // печатьЦенниковToolStripMenuItem
+            // 
+            this.печатьЦенниковToolStripMenuItem.Name = "печатьЦенниковToolStripMenuItem";
+            this.печатьЦенниковToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.печатьЦенниковToolStripMenuItem.Text = "Печать ценников";
+            this.печатьЦенниковToolStripMenuItem.Click += new System.EventHandler(this.ПечатьЦенниковToolStripMenuItem_Click);
+            // 
+            // переучётToolStripMenuItem
+            // 
+            this.переучётToolStripMenuItem.Name = "переучётToolStripMenuItem";
+            this.переучётToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.переучётToolStripMenuItem.Text = "Переучёт";
+            this.переучётToolStripMenuItem.Click += new System.EventHandler(this.ПереучётToolStripMenuItem_Click);
             // 
             // label2
             // 
@@ -437,28 +460,6 @@
             this.удалитьToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.удалитьToolStripMenuItem.Text = "Удалить";
             this.удалитьToolStripMenuItem.Click += new System.EventHandler(this.DelProduct_Click);
-            // 
-            // печатьToolStripMenuItem
-            // 
-            this.печатьToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.печатьЦенниковToolStripMenuItem,
-            this.переучётToolStripMenuItem});
-            this.печатьToolStripMenuItem.Name = "печатьToolStripMenuItem";
-            this.печатьToolStripMenuItem.Size = new System.Drawing.Size(58, 20);
-            this.печатьToolStripMenuItem.Text = "Печать";
-            // 
-            // печатьЦенниковToolStripMenuItem
-            // 
-            this.печатьЦенниковToolStripMenuItem.Name = "печатьЦенниковToolStripMenuItem";
-            this.печатьЦенниковToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.печатьЦенниковToolStripMenuItem.Text = "Печать ценников";
-            this.печатьЦенниковToolStripMenuItem.Click += new System.EventHandler(this.ПечатьЦенниковToolStripMenuItem_Click);
-            // 
-            // переучётToolStripMenuItem
-            // 
-            this.переучётToolStripMenuItem.Name = "переучётToolStripMenuItem";
-            this.переучётToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.переучётToolStripMenuItem.Text = "Переучёт";
             // 
             // MainMenu
             // 

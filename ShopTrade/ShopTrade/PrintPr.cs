@@ -11,32 +11,33 @@ namespace ShopTrade
 {
     public partial class PrintPr : Form
     {
-        string s1 ="<table border=\"1\" style=\"height: 86px; width: 0%; border-collapse: collapse; border: solid;\">"; //начало таблицы
+        //="<table border=\"1\" style=\"height: 86px; width: 400px; border-collapse: collapse; border: solid;\">"; 
+        string s1 = "<table border = \"1\" width:\"500\" style = \"border-collapse: collapse; border: solid;\">";//начало таблицы
         string s2 = "<tbody>"; //начало таблицы
         string s3 = "<tr style=\"height: 15px;\">"; //начало строки таблицы
         string sl = "border-right: solid;"; // стиль ячеек в центре левых
         string sr = "border-left: solid;"; // стиль ячеек в центре правых
         string sc = "\"";
-        string sn1 = "<td style=\"width: 200px;max-width:200px; height: 86px; border-style: none;";//ячейка название
-        string sn11=     "><big><big>&nbsp; "; //ячейка название
-        string sn2 = "</big></big></td>";//ячейка название
-        string sd1 = "<td style=\"width: 15.9907%; height: 23px; border-style: none; text-align: right; ";//ячейка дата
+        string sn1 = "<td style=\"min-width:130px;max-width:130px; height: 86px; border-style: none;";//ячейка название
+        string sn11= "><strong>&nbsp; "; //ячейка название
+        string sn2 = "</strong></td>";//ячейка название
+        string sd1 = "<td style=\"min-width:100px;max-width:100px; height: 23px; border-style: none; text-align: right; ";//ячейка дата
         string sd11 ="><strong>&nbsp; "; //ячейка дата
         string sd2 = "</strong></td>";//ячейка дата
-        string snn1 = "<td style=\"width: 1.83963%; height: 23px; border-style: none;";
-        string snn2  = "></td>"; //пустая ячейка
+        string snn1 = "<td style=\"min-width:3px; height: 23px; border-style: none;"; //пустая ячейка
+        string snn2  = ">&nbsp; </td>"; //пустая ячейка
         string ser = "</tr>"; //конец строки
-        string sa1 = "<td style=\"width: 33.4433%; height: 23px; border-style: none;text-align: center;";//ячейка артикул
-        string sa11= "><strong><big><big><big><big>&nbsp;"; //ячейка артикул
-        string sa2 = "</big></big></big></big></strong></td>"; //ячейка артикул
-        string sp1 = "<td style=\"width: 15.9907%; height: 23px; border-style: none;text-align: right;";//ячейка цены
-        string sp11 =    "><strong><big>&nbsp;"; //ячейка цены
-        string sp2 = " руб.</big></strong></td>"; //ячейка цены
-        string sa = "<td style=\"width: 33.4433%; height: 15px; border-style: none;";//ячейка код
+        string sa1 = "<td style=\"min-width:100px;max-width:100px; height: 23px; border-style: none;text-align: center;";//ячейка артикул
+        string sa11= "><strong>&nbsp;"; //ячейка артикул
+        string sa2 = "</strong></td>"; //ячейка артикул
+        string sp1 = "<td style=\"min-width:100px;max-width:100px; height: 23px; border-style: none;text-align: right;";//ячейка цены
+        string sp11 = "><strong><big><big>&nbsp;"; //ячейка цены
+        string sp2 = " руб.</big></big></strong></td>"; //ячейка цены
+        string sa = "<td style=\"min-width:100px;max-width:100px; height: 15px; border-style: none;";//ячейка код
         string saa =    "><strong><small>&nbsp;код:</small></strong></td>"; //ячейка код
-        string sp = "<td style = \"width: 15.9907%; height: 15px; border-style: none;";// ячейка цена
+        string sp = "<td style = \"min-width:100px; height: 15px; border-style: none;";// ячейка цена
         string spp  =  " ><small> &nbsp; цена:</small></td>"; // ячейка цена
-        string sm1 = "<td style=\"width: 15.9907%; height: 14px; border-style: none;";//Машбум
+        string sm1 = "<td style=\"min-width:100px;max-width:100px; height: 14px; border-style: none;text-align: right;";//Машбум
         string sm2 = "><strong><small><small>ООО \"МашБум\"</small></small></strong></td>"; //Машбум
         string s4 = "</tbody>";//конец таблицы
         string s5 = "</table>"; //конец таблицы
@@ -60,8 +61,8 @@ namespace ShopTrade
             m_sqlCmd.Connection = m_dbConn;
             string nam;
             float pri;
-            string art,art2;
-            int j=0,x=0;
+            string art,art2,art3;
+            int j=0,k=0;
 
             if (count == 1)
                 MessageBox.Show("Не выбраны товары для печати!");
@@ -94,16 +95,27 @@ namespace ShopTrade
                     sw.WriteLine(s3); //начало строки
 
                     sw.Write(sn1 + sc + sn11);//название               
-                    sw.Write(dataGridView2[1,0].Value.ToString() + "                         ");//название
+                    sw.Write(dataGridView2[1, 0].Value.ToString());//название
                     sw.WriteLine(sn2);//название
 
                     sw.Write(sd1 + sl + sc + sd11);//дата                    
                     sw.Write(DateTime.Now.ToShortDateString());//дата
                     sw.WriteLine(sd2);//дата
-                    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                      //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                     sw.WriteLine(snn1 + sc + snn2);//пустая строка
-                    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                    sw.Write(sn1 + sr + sc + sn11); //название таблица справа       
+                                                   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                    sw.Write(sn1 + sr + sc + sn11);//название    центр            
+                    sw.Write(dataGridView2[1, 0].Value.ToString());//название центр
+                    sw.WriteLine(sn2);//название центр
+
+                    sw.Write(sd1 + sl + sc + sd11);//дата         центр            
+                    sw.Write(DateTime.Now.ToShortDateString());//дата центр
+                    sw.WriteLine(sd2);//дата центр
+                                      //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                    sw.WriteLine(snn1 + sc + snn2);//пустая строка
+                                                   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                    sw.Write(sn1 + sr + sc + sn11); //название таблица справа  
+                    sw.Write(dataGridView2[1, 0].Value.ToString());//название
                     sw.WriteLine(sn2);//название таблица справа
 
                     sw.Write(sd1 + sc + sd11); //дата таблица справа  
@@ -111,7 +123,7 @@ namespace ShopTrade
                     sw.WriteLine(sd2);//дата таблица справа
 
                     sw.WriteLine(ser); //конец строки
-                    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                       //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                     sw.WriteLine(s3); //начало строки
 
                     sw.WriteLine(sa1 + sc + sa11 + art + sa2);// Артикул
@@ -119,42 +131,42 @@ namespace ShopTrade
                     sw.Write(sp1 + sl + sc + sp11);// Цена
                     sw.Write(dataGridView2[4, 0].Value.ToString());// Цена
                     sw.WriteLine(sp2);// Цена
-                    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                      //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                     sw.WriteLine(snn1 + sc + snn2);//пустая строка
-                    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                    sw.Write(sa1 + sr + sc + sa11 + "000"); // Артикул таблица справа       
+                                                   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                    sw.WriteLine(sa1 + sr + sc + sa11 + art + sa2);// Артикул центр
+
+                    sw.Write(sp1 + sl + sc + sp11);// Цена центр
+                    sw.Write(dataGridView2[4, j].Value.ToString());// Цена центр
+                    sw.WriteLine(sp2);// Цена центр
+                                      //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                    sw.WriteLine(snn1 + sc + snn2);//пустая строка
+                                                   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                    sw.Write(sa1 + sr + sc + sa11 + art); // Артикул таблица справа       
                     sw.WriteLine(sa2);// Артикул
 
                     sw.Write(sp1 + sc + sp11);// Цена таблица справа  
+                    sw.Write(dataGridView2[4, k].Value.ToString());// Цена
                     sw.WriteLine(sp2);// Цена таблица справа  
 
-
                     sw.WriteLine(ser); //конец строки 
-                    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                       //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                     sw.WriteLine(s3); //начало строки
-
-                    sw.WriteLine(sa + sc + saa);//код
-
-                    sw.WriteLine(sp + sl + sc + spp);// слово цена
-                    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                    sw.WriteLine(snn1 + sc + snn2);//пустая строка
-                    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                    sw.WriteLine(sa + sr + sc + saa);//код таблица справа  
-
-                    sw.WriteLine(sp + sc + spp);//  слово цена таблица справа  
-
-                    sw.WriteLine(ser); //конец строки
-                    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                    sw.WriteLine(s3); //начало строки
-
 
                     sw.Write(snn1 + sc);//пустая строка
                     sw.WriteLine(snn2);//пустая строка
 
                     sw.WriteLine(sm1 + sl + sc + sm2);//  МашБум
-                    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                      //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                     sw.WriteLine(snn1 + sc + snn2);//пустая строка
-                    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                    sw.Write(snn1 + sr + sc);//пустая строка центр
+                    sw.WriteLine(snn2);//пустая строка центр
+
+                    sw.WriteLine(sm1 + sl + sc + sm2);//  МашБум центр
+                                                      //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                    sw.WriteLine(snn1 + sc + snn2);//пустая строка
+                                                   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
                     sw.Write(snn1 + sr + sc);//пустая строка таблица справа  
                     sw.WriteLine(snn2);//пустая строка таблица справа  
@@ -162,7 +174,7 @@ namespace ShopTrade
                     sw.WriteLine(sm1 + sc + sm2);//  МашБум таблица справа  
 
                     sw.WriteLine(ser); //конец строки
-                    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                       //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                     sw.WriteLine(s4); //конец таблицы
                     sw.WriteLine(s5); // конец таблицы
                     sw.WriteLine(s6); // пустая строка
@@ -190,7 +202,9 @@ namespace ShopTrade
                         art = Convert.ToString(result);
 
                         if (i < (count-2))
-                            j = i + 1; 
+                            j = i + 1;
+                        if (j <(count-2))
+                            k = j + 1;
                      /*   if (j == (count - 1))
                             j = (count - 2);*/
 
@@ -210,6 +224,23 @@ namespace ShopTrade
                         }
                         result = m_sqlCmd.ExecuteScalar();
                         art2 = Convert.ToString(result);
+
+                        nam = dataGridView2[1, k].Value.ToString();
+                        pri = float.Parse(dataGridView2[4, k].Value.ToString());
+
+                        try
+                        {
+                            m_sqlCmd.CommandText = "SELECT Articule FROM Products " +
+                                             " WHERE (Name = '" + nam + "' ) AND (Price = " + pri + ");";
+
+                            m_sqlCmd.ExecuteNonQuery();
+                        }
+                        catch (SQLiteException ex)
+                        {
+                            MessageBox.Show("Error: " + ex.Message);
+                        }
+                        result = m_sqlCmd.ExecuteScalar();
+                        art3 = Convert.ToString(result);
                         sw.WriteLine(s1);
                         sw.WriteLine(s2);
                         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -225,8 +256,18 @@ namespace ShopTrade
                         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                         sw.WriteLine(snn1 + sc + snn2);//пустая строка
                         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                        sw.Write(sn1 + sr + sc + sn11);//название    центр            
+                        sw.Write(dataGridView2[1, j].Value.ToString());//название центр
+                        sw.WriteLine(sn2);//название центр
+
+                        sw.Write(sd1 + sl + sc + sd11);//дата         центр            
+                        sw.Write(DateTime.Now.ToShortDateString());//дата центр
+                        sw.WriteLine(sd2);//дата центр
+                        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                        sw.WriteLine(snn1 + sc + snn2);//пустая строка
+                        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                         sw.Write(sn1 + sr + sc + sn11); //название таблица справа  
-                        sw.Write(dataGridView2[1, j].Value.ToString());//название
+                        sw.Write(dataGridView2[1, k].Value.ToString());//название
                         sw.WriteLine(sn2);//название таблица справа
 
                         sw.Write(sd1 + sc + sd11); //дата таблица справа  
@@ -245,28 +286,22 @@ namespace ShopTrade
                         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                         sw.WriteLine(snn1 + sc + snn2);//пустая строка
                         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                        sw.Write(sa1 + sr + sc + sa11 + art2); // Артикул таблица справа       
-                        sw.WriteLine(sa2);// Артикул
+                        sw.WriteLine(sa1 + sr + sc + sa11 + art2 + sa2);// Артикул центр
 
-                        sw.Write(sp1 + sc + sp11);// Цена таблица справа  
-                        sw.Write(dataGridView2[4, j].Value.ToString());// Цена
-                        sw.WriteLine(sp2);// Цена таблица справа  
-
-                        sw.WriteLine(ser); //конец строки 
-                        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                        sw.WriteLine(s3); //начало строки
-
-                        sw.WriteLine(sa + sc + saa);//код
-
-                        sw.WriteLine(sp + sl + sc + spp);// слово цена
+                        sw.Write(sp1 + sl + sc + sp11);// Цена центр
+                        sw.Write(dataGridView2[4, j].Value.ToString());// Цена центр
+                        sw.WriteLine(sp2);// Цена центр
                         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                         sw.WriteLine(snn1 + sc + snn2);//пустая строка
                         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                        sw.WriteLine(sa + sr + sc + saa);//код таблица справа  
+                        sw.Write(sa1 + sr + sc + sa11 + art3); // Артикул таблица справа       
+                        sw.WriteLine(sa2);// Артикул
 
-                        sw.WriteLine(sp + sc + spp);//  слово цена таблица справа  
+                        sw.Write(sp1 + sc + sp11);// Цена таблица справа  
+                        sw.Write(dataGridView2[4, k].Value.ToString());// Цена
+                        sw.WriteLine(sp2);// Цена таблица справа  
 
-                        sw.WriteLine(ser); //конец строки
+                        sw.WriteLine(ser); //конец строки 
                         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                         sw.WriteLine(s3); //начало строки
 
@@ -277,6 +312,14 @@ namespace ShopTrade
                         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                         sw.WriteLine(snn1 + sc + snn2);//пустая строка
                         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                        sw.Write(snn1 + sr + sc);//пустая строка центр
+                        sw.WriteLine(snn2);//пустая строка центр
+
+                        sw.WriteLine(sm1 + sl + sc + sm2);//  МашБум центр
+                        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                        sw.WriteLine(snn1 + sc + snn2);//пустая строка
+                        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
                         sw.Write(snn1 + sr + sc);//пустая строка таблица справа  
                         sw.WriteLine(snn2);//пустая строка таблица справа  
 
@@ -287,22 +330,7 @@ namespace ShopTrade
                         sw.WriteLine(s4); //конец таблицы
                         sw.WriteLine(s5); // конец таблицы
                         sw.WriteLine(s6); // пустая строка
-                        if (i - 8 == 0)
-                            for (int z = 0; z < 2; z++)
-                            {
-                                sw.Write(N+s6); // пустая строка
-                            }
-                        if (i - 18 == 0)
-                            for (int z = 0; z < 3; z++)
-                            {
-                                sw.Write(N+s6); // пустая строка
-                            }
-                        if (i -20 == 6)
-                            for (int z = 0; z > 3; z++)
-                            {
-                                sw.WriteLine(N); // пустая строка
-                            }
-                        i++;
+                        i += 2;
                     }
                 sw.Close();
                 Process.Start("prices.html");

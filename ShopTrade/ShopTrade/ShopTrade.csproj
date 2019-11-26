@@ -25,7 +25,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>6</ApplicationRevision>
+    <ApplicationRevision>12</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -114,23 +114,11 @@
     <Compile Include="AddProduct.Designer.cs">
       <DependentUpon>AddProduct.cs</DependentUpon>
     </Compile>
-    <Compile Include="AttCloseDay.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="AttCloseDay.Designer.cs">
-      <DependentUpon>AttCloseDay.cs</DependentUpon>
-    </Compile>
     <Compile Include="ChPas.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ChPas.Designer.cs">
       <DependentUpon>ChPas.cs</DependentUpon>
-    </Compile>
-    <Compile Include="CloseDay.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="CloseDay.Designer.cs">
-      <DependentUpon>CloseDay.cs</DependentUpon>
     </Compile>
     <Compile Include="Colors.cs">
       <SubType>Form</SubType>
@@ -160,6 +148,18 @@
     </Compile>
     <Compile Include="NewDay.Designer.cs">
       <DependentUpon>NewDay.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PasswordR.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PasswordR.Designer.cs">
+      <DependentUpon>PasswordR.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PasswordL.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PasswordL.Designer.cs">
+      <DependentUpon>PasswordL.cs</DependentUpon>
     </Compile>
     <Compile Include="PasswordD.cs">
       <SubType>Form</SubType>
@@ -223,6 +223,12 @@
     <Compile Include="DelBask.Designer.cs">
       <DependentUpon>DelBask.cs</DependentUpon>
     </Compile>
+    <Compile Include="Attention.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Attention.Designer.cs">
+      <DependentUpon>Attention.cs</DependentUpon>
+    </Compile>
     <Compile Include="WarningOpenDay.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -238,14 +244,8 @@
     <EmbeddedResource Include="AddProduct.resx">
       <DependentUpon>AddProduct.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AttCloseDay.resx">
-      <DependentUpon>AttCloseDay.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="ChPas.resx">
       <DependentUpon>ChPas.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="CloseDay.resx">
-      <DependentUpon>CloseDay.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Colors.resx">
       <DependentUpon>Colors.cs</DependentUpon>
@@ -259,6 +259,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="NewDay.resx">
       <DependentUpon>NewDay.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PasswordR.resx">
+      <DependentUpon>PasswordR.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PasswordL.resx">
+      <DependentUpon>PasswordL.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PasswordD.resx">
       <DependentUpon>PasswordD.cs</DependentUpon>
@@ -298,6 +304,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DelBask.resx">
       <DependentUpon>DelBask.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Attention.resx">
+      <DependentUpon>Attention.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WarningOpenDay.resx">
       <DependentUpon>WarningOpenDay.cs</DependentUpon>

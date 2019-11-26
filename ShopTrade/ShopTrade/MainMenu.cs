@@ -57,8 +57,8 @@ namespace ShopTrade
                 {
                     MessageBox.Show("Error: " + ex.Message);
                 }
-
-                DataTable dTable = new DataTable();
+           
+            DataTable dTable = new DataTable();
                 String sqlQuery;
                 if (m_dbConn.State != ConnectionState.Open)
                 {
@@ -81,17 +81,15 @@ namespace ShopTrade
                     MessageBox.Show("Error: " + ex.Message);
                 }
             dt1 = ((DataTable)dataGridView1.DataSource).Clone();
+          
+           
+
         }
         public MainMenu()
         {
             System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
             InitializeComponent();
-            ds.Tables.Add(dt);
-            DateTime mod = new DateTime();
-            mod = DateTime.Today;
-            StreamWriter sw = new StreamWriter(@"dd.ddd");
-            sw.Write(mod.ToString());
-            sw.Close();
+            ds.Tables.Add(dt);           
             //FormBorderStyle = FormBorderStyle.None;
             WindowState = FormWindowState.Maximized;
             // textBox1.Width = textBox1.Width * 2;
@@ -107,47 +105,6 @@ namespace ShopTrade
         {
             AddProduct form2 = new AddProduct();
             form2.ShowDialog();
-        }
-        /// ////////////////////////////
-        private void OpenDay_Click(object sender, EventArgs e)//Открытие смены
-        {
-            string nF = "dd.ddd";
-            
-            DateTime mod= new DateTime();
-            DateTime openD=new DateTime();
-
-            StreamReader sr = new StreamReader(@nF);
-            sr.BaseStream.Position = 0;
-
-            openD = DateTime.Parse(sr.ReadToEnd());
-            sr.Close();
-            mod = DateTime.Today;
-            ///////////////////////////////
-            //Проверка на открытие смены
-            ///////////////////////////////
-            if (openD.DayOfYear == mod.DayOfYear)
-            {
-                WarningOpenDay form4 = new WarningOpenDay();
-                form4.ShowDialog();
-
-            }
-            else
-            {
-                StreamWriter sw = new StreamWriter(@"dd.ddd");
-                sw.Write(mod.ToString());
-                sw.Close();
-
-                NewDay form5 = new NewDay();
-                form5.ShowDialog();
-
-
-            }
-        }
-        /// ////////////////////////////
-        private void CloseDay_Click(object sender, EventArgs e)//кнопка закрытия смены
-        {
-            CloseDay form3 = new CloseDay();
-            form3.ShowDialog();
         }
         /// ////////////////////////////
         private void MainMenu_Resize(object sender, EventArgs e)
@@ -189,11 +146,43 @@ namespace ShopTrade
         /// ////////////////////////////
         private void MainMenu_Load(object sender, EventArgs e)
         {
-            dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridView1.Columns["ProductId"].Visible = false;
-           
-            dataGridView1.ContextMenuStrip = contextMenuStrip2;
-            LoadBase(dataGridView1);
+
+            string nF = "ff";
+            string first ;
+            if (!System.IO.File.Exists(nF))
+            { 
+                StreamWriter file = new StreamWriter(@nF);
+                file.Write("");
+                file.Close();
+            }
+            StreamReader sr = new StreamReader(@nF);
+            sr.BaseStream.Position = 0;
+
+            first = (sr.ReadToEnd()).ToString();
+            sr.Close();
+            ///////////////////////////////
+            //Проверка на открытие смены
+            ///////////////////////////////
+            if (first == "1")
+            {
+                dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+                dataGridView1.Columns["ProductId"].Visible = false;
+
+                dataGridView1.ContextMenuStrip = contextMenuStrip2;
+                LoadBase(dataGridView1);
+
+            }
+            else
+            {
+                
+                StreamWriter sw = new StreamWriter(@nF);
+                sw.Write("1");
+                sw.Close();
+                Attention form = new Attention();
+                form.ShowDialog();
+
+            }
+
         }
         /// ////////////////////////////
         private void TextBox1_KeyPress(object sender, KeyPressEventArgs e)
@@ -220,60 +209,46 @@ namespace ShopTrade
             }
             else
             {
-                if (dataGridView2.Rows.Count == 0)
-                    n = 0;
+                //if (dataGridView2.Rows.Count == 0)
+                    n = dataGridView2.Rows.Count-1;
                 int tr = 0;
                 int ind = dataGridView1.CurrentRow.Index; // индекс выделенной строки
                 int qua = int.Parse((dataGridView1[3, ind].Value).ToString()); // количество, в выделенной строке  
                 dataGridView1[3, ind].Value = int.Parse((dataGridView1[3, ind].Value).ToString()) - 1; // минус 1 в таблице
 
-                foreach (DataGridViewRow row in dataGridView1.SelectedRows)
-                {
-
                     for (int i = 0; i < n; i++)
                     {
                         if (dataGridView1[1, ind].Value == dataGridView2[0, i].Value)
                         {
-                            // dt1.ImportRow(((DataTable)dataGridView1.DataSource).Rows[row.Index]);
+                            //dt1.ImportRow(((DataTable)dataGridView1.DataSource).Rows[ind]);
                             dataGridView2[2, i].Value = int.Parse((dataGridView2[2, i].Value).ToString()) + 1; // введенное значение в корзине
-                            tv += double.Parse((dataGridView2[3, i].Value).ToString());
+                            tv += double.Parse((dataGridView1[5, ind].Value).ToString());
                             tr = 1;
                             goto qwer;
                         }
                     }
                     if (tr == 0)
                     {
-                        dt1.ImportRow(((DataTable)dataGridView1.DataSource).Rows[row.Index]);
+                        dt1.ImportRow(((DataTable)dataGridView1.DataSource).Rows[ind]);
                         dataGridView2.DataSource = dt1;
                         dataGridView2[2, n].Value = qua - int.Parse((dataGridView1[3, ind].Value).ToString()); // введенное значение в корзине
-                        tv += double.Parse((dataGridView2[3, n].Value).ToString());
+                        tv += double.Parse((dataGridView1[5, ind].Value).ToString());
                     }
-
-                }
-                n++;
+            
                 qwer:
                 label3.Text = "К ОПЛАТЕ: " + tv;
                 dt1.AcceptChanges();
                 
             }
-            //dataset2 = dataGridView2.DataSource;
-            // dataset2.WriteXml("1.xml");//сериализовать в файл все данные из датасет
         }
         /// ////////////////////////////
         private void Button2_Click(object sender, EventArgs e)//оплата
         {
-            //dataGridView2.DataSource = ds.Tables[0];
-            ds.WriteXml("1.xml");
             Payment formP = new Payment(tv)
             {
                 Owner = this
             };
-            //this.Hide();
             formP.ShowDialog();
-            //this.Close();
-            if (formP.ff == false)
-            { n = 0; tv = 0; }
-            else { ds.WriteXml("1.xml"); }
         }
         /// ////////////////////////////
         private void TextBox1_TextChanged(object sender, EventArgs e)
@@ -425,7 +400,7 @@ namespace ShopTrade
             S.ShowDialog();
         }
 
-        private void ПереучётToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ПереучётToolStripMenuItem_Click(object sender, EventArgs e)    
         {
             int count = dataGridView1.Rows.Count;
 
@@ -476,6 +451,25 @@ namespace ShopTrade
             sw.WriteLine(s6); // пустая строка
             sw.Close();
             Process.Start("full.html");
+        }
+
+        private void резервнаяКопияToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            PasswordR S = new PasswordR();
+            S.Show();
+
+        }
+
+        private void загрузкаПоследнихБазToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            m_dbConn = new SQLiteConnection("Data Source=" + "Colors.db" + ";Version=3;");
+            m_dbConn.Open();
+            m_sqlCmd.Connection = m_dbConn;
+            m_dbConn.Dispose();
+            GC.Collect();
+            PasswordL S = new PasswordL();
+            S.Show();
+
         }
     }
 }

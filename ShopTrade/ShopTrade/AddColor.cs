@@ -34,7 +34,7 @@ namespace ShopTrade
 
             string name = "0";
             double quan = 0;
-            if ((textBox1.Text.Length >= 4) && (textBox2.Text.Length >= 1))
+            if ((textBox1.Text.Length >= 3) && (textBox2.Text.Length >= 1))
             {
                 var originalColor = button1.BackColor;
                 button1.BackColor = Color.Green;

@@ -47,7 +47,6 @@ namespace ShopTrade
             m_dbConn = new SQLiteConnection("Data Source=" + dbFileName + ";Version=3;");
             m_dbConn.Open();
             m_sqlCmd.Connection = m_dbConn;
-
             DateTime DT = DateTime.Now;
             float QuPr = 0;
             MainMenu form2 = this.Owner as MainMenu;
@@ -57,15 +56,13 @@ namespace ShopTrade
                 {
                     int qu = int.Parse(form2.dataGridView2[2, i].Value.ToString());
                     string nam;
-                    float pri;
                     nam = form2.dataGridView2.Rows[i].Cells[0].Value.ToString();
-                    pri = int.Parse(form2.dataGridView2[2, i].Value.ToString());
                     DataTable dTable = new DataTable();
                     try
                     {
                         m_sqlCmd.CommandText = "UPDATE Products " +
                                         "SET Quantity = Quantity - " + qu +
-                                         " WHERE (Name = '" + nam + "' ) AND (Price = "+pri+");";
+                                         " WHERE Name = '" + nam + "';";
 
                         m_sqlCmd.ExecuteNonQuery();
                     }
@@ -73,7 +70,6 @@ namespace ShopTrade
                     {
                         MessageBox.Show("Error: " + ex.Message);
                     }
-
                     QuPr = (float.Parse(form2.dataGridView2[3, i].Value.ToString()) * int.Parse(form2.dataGridView2[2, i].Value.ToString()));
                     try
                     {
@@ -83,7 +79,7 @@ namespace ShopTrade
                             form2.dataGridView2[2, i].Value + "' , '" + //количество
                             DT + "' , '" + //дата продажи
                             QuPr + "' , '" + //цена
-                            01 + "')"; //BuyersID Наличные
+                            01 + "')"; //BuyersID нал
 
                         m_sqlCmd.ExecuteNonQuery();
                     }

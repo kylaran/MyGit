@@ -1,0 +1,19 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@{
+    ViewBag.Title = "Home Page";
+}
+<div id="app">
+
+</div>
+@Scripts.Render("~/node_modules/vue/dist/vue.min.js")
+
+<script>
+    const v = new Vue({
+        el: '#app',
+        data: {
+            message: 'Hello Vue.js!'
+        }
+    })
+</script>

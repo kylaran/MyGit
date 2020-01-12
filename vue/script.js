@@ -1,11 +1,12 @@
  var app = new Vue ({
 	el:'#app',
 	data:{
-		count :0
+		url :"",
+		cleanUrl:""
 	},
 	methods: {
-			CountUp: function(){
-				this.count +=1
+			CleanerUrl: function(){
+				this.cleanUrl =this.url.replace(/^https?:\/\//, '').replace(/\/$/,'')
 			},
 			CountDown: function(){
 				this.count -=1

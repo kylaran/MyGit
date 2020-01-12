@@ -11,10 +11,10 @@ crossorigin="anonymous">
 
 <div id="app">
 		<div class="container">
-			<h1>App</h1>
-			<h1>{{ count }}</h1>
-			<button class="btn btn-success" @click="CountUp"> +1 </button>
-			<button class="btn btn-success" @click="CountDown"> -1 </button>
+			<h1>URL: <a v-bind:href="url">{{cleanUrl}}</a></h1>
+			<input type="text" class="form-control" v-model="url">
+			<button class="btn btn-primary" @click="CleanerUrl">Clean Url</button>
+			
 		</div>
 		
 </div>

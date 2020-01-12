@@ -1,19 +1,35 @@
- var app = new Vue({
+var app = new Vue({
      el: '#app'
-     , data: {title: "Style",
-              isRounded: false,
-              sizeToggle: false,
-              disabled: false,
-              fontColor: '#ccc',
-              backgroundColor: 'yellow'
-
+     , data: {
+data: [0,1,2,3,4,5,6,7,8,9,10,11],
+         perPage: 3,
+         pagination:{}
      },
-     computed:{
-         styles: function(){
-             return{
-                 color: this.fontColor,
-                 background: this.backgroundColor
-             }
-         }
-     }
+    computed:{
+        collection(){
+            return this.paginate(this.data);
+        }
+    },
+    methods:{
+        setPage(p){
+            this.pagination = this.paginator(this.data.length,p);
+        },
+        paginate(data){
+            return _.slice(data,this.pagination.startIndex,this.pagination.endIndex + 1)
+        },
+        paginator (totalItems, currentPage){
+            var startIndex= (currentPage - 1) * this.perPage,
+                endIndex = Math.min(startIndex + this.perPage - 1, totalItems -1);
+            return {
+                currentPage: currentPage,
+                startIndex: startIndex,
+                endIndex: endIndex,
+                pages: _.range(1, Math.ceil(totalItems / this.perPage) + 1)
+
+            };
+        }
+    },
+created(){
+    this.setPage(1);
+}
  })

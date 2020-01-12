@@ -7,7 +7,17 @@
 <body>
 
 <div id="app">
-	<h1 v-html ='message'></h1>
+	<!-- <h1 v-show="view" v-html ='message'></h1>-->
+	
+	<h1 v-if="view" v-html ='message'></h1>
+	<h1 v-else>False</h1>
+	
+	<input type="text" v-model='message1'> 
+	<h1>{{message1}}</h1>
+	
+	<input type="checkbox" v-model='checked'> 
+	<label for="checkbox">{{checked}}</label>
+	<h1 v-pre>{{My name is Slim Shady}}</h1>
 	
 </div>
 

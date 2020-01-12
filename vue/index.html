@@ -2,26 +2,24 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>First step</title>
+<title>Study Vue</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" 
+integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" 
+crossorigin="anonymous">
 </head>
 <body>
 
 <div id="app">
-	<!-- <h1 v-show="view" v-html ='message'></h1>-->
-	
-	<h1 v-if="view" v-html ='message'></h1>
-	<h1 v-else>False</h1>
-	
-	<input type="text" v-model='message1'> 
-	<h1>{{message1}}</h1>
-	
-	<input type="checkbox" v-model='checked'> 
-	<label for="checkbox">{{checked}}</label>
-	<h1 v-pre>{{My name is Slim Shady}}</h1>
-	
+		<div class="container">
+			<h1>App</h1>
+			<h1>{{ count }}</h1>
+			<button class="btn btn-success" @click="CountUp"> +1 </button>
+			<button class="btn btn-success" @click="CountDown"> -1 </button>
+		</div>
+		
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-<script src="script.js"> </script>
+<script src="script.js"></script>
 </body>
 </html>

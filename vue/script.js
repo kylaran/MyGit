@@ -1,10 +1,15 @@
  var app = new Vue ({
 	el:'#app',
-	data: {
-			view: false,
-			message: 'Hello',
-			message1:'',
-			checked: 'True'
+	data:{
+		count :0
+	},
+	methods: {
+			CountUp: function(){
+				this.count +=1
+			},
+			CountDown: function(){
+				this.count -=1
+			}
 			
 		}
 })  

@@ -1,25 +1,13 @@
 var app = new Vue({
-     el: '#app'
-     , data:
+     el: '#app',
+     data:
      {
-items:[
-    'Home',
-    'About',
-    'Blog',
-    'Map',
-    'Contacts',
-],show:false,
+         message:''
      },
-    computed:
-    {
+    methods:{
+        reverseM:function(){
+            this.message = this.message.split('').reverse().join('')
 
-    },
-    methods:
-    {
-
-    },
-created()
-    {
-
-}
+        }
+    }
  });
